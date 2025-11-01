@@ -1,6 +1,8 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login({ onLogin }) {
+  const navigate = useNavigate();
 
   const [status, setStatus] = useState("")
 
@@ -23,15 +25,22 @@ export default function Login() {
           headers: { "Content-Type": "application/json" }, // needed for flask
           body: JSON.stringify(formData),
         })
-        
-        if (!res.ok) throw new Error("Request failed")
 
         const data = await res.json()
-        setFormData({ username: "", password: ""}) // reset form
-        setStatus(data.message || "Message sent successfully!")
+        
+        if (res.ok && data.token) {
+          localStorage.setItem("token", data.token);
+          setFormData({ username: "", password: ""}) // reset form
+          onLogin(); // update parent state
+          navigate("/dashboard"); // redirect
+          alert(data.message)
+        } else {
+          alert(data.error)
+          setStatus("Login failed");
+        }
       } catch (err) {
-        console.error(err)
-        setStatus("Error sending message. Please try again.")
+        console.error(err);
+        setStatus("Error sending message");
       }
   }
 

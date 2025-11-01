@@ -1,5 +1,6 @@
 Flask
 requests
 Flask-Cors
-Flask-Session
-pytz
+PyJWT
+python-dotenv
+Werkzeug
