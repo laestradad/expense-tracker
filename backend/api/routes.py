@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 import jwt
 from functools import wraps
+from services.dataProcess import process_csv
 
 api_bp = Blueprint("api", __name__)
 
@@ -35,6 +36,22 @@ def hello():
 @login_required
 def dashboard():
     return jsonify({"message": "Hello, you are authenticated!"})
+
+@api_bp.route('/upload', methods = ['POST'])
+def upload():
+    title = request.form.get("title", "")
+    file = request.files.get("file")
+    print(title, file)
+    if not file:
+        return jsonify({"error": "No file uploaded"}), 400
+    
+    # Read CSV into pandas dataframe
+    try:
+        table_json = process_csv(file)
+    except Exception as e:
+        return jsonify({"error": f"Failed to read CSV: {str(e)}"}), 400
+
+    return jsonify({"title": title, "table": table_json, "message": "file received!"})
 
 
 
