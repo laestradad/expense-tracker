@@ -1,26 +1,18 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
+from flask import Flask
+from extensions import cors
+from auth.routes import auth_bp
+from api.routes import api_bp
 
-app = Flask(__name__)
-CORS(app)
+def create_app(config_name=None):
+    app = Flask(__name__)
+    app.config.from_object(config_name)
+    cors.init_app(app)
 
-@app.route("/api/hello", methods=["GET"])
-def hello():
-    return jsonify(message="Hello from Flask!")
+    app.register_blueprint(auth_bp, url_prefix="/auth")
+    app.register_blueprint(api_bp, url_prefix="/api")
 
-@app.route("/api/login", methods=["POST"])
-def login():
-    data = request.get_json()    
-    
-    if not data:
-        return jsonify({"message": "No data received"}), 400
-    
-    username = data.get("username", "")
-    password = data.get("password", "")
-    print(f"Contact form submission: {username} / {password}")
-
-    return jsonify({"message": f"Thanks {username}, your message was received!"}), 200
-
+    return app
 
 if __name__ == "__main__":
+    app = create_app("DevelopmentConfig")
     app.run(debug=True, port=5000)

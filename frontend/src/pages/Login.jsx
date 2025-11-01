@@ -18,7 +18,7 @@ export default function Login() {
     event.preventDefault() // prevent page reload
     setStatus("Sending...")
     try {
-        const res = await fetch('/api/login', {
+        const res = await fetch('/auth/login', {
           method: "POST",
           headers: { "Content-Type": "application/json" }, // needed for flask
           body: JSON.stringify(formData),
