@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
+import { useAuth } from "../contexts/AuthContext"
 
-export default function Header({ loggedIn, onLogout }) {
+export default function Header() {
+  const { loggedIn, logout } = useAuth();
+
   return (
     <nav>
       <Link to="/"> Home </Link> |{ " " }
@@ -8,7 +11,7 @@ export default function Header({ loggedIn, onLogout }) {
       {loggedIn ? (
         <>
           <Link to="/dashboard">Dashboard</Link> |{ " " }
-          <Link onClick={onLogout}>Logout</Link>
+          <Link to="/login" onClick={logout}>Logout</Link>
         </>
         ) : (
         <Link to="/login">Login</Link>

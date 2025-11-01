@@ -1,26 +1,20 @@
 import { BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
-import { useState } from 'react';
+import { AuthProvider, useAuth } from "./contexts/AuthContext"
 import Header from './components/Header'
 import Footer from './components/Footer'
-import LoginRequired from './components/LoginRequired.jsx'
+import LoginRequired from './components/LoginRequired'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import About from './pages/About'
 import Dashboard from './pages/Dashboard'
 import './App.css'
 
-function App() {
-  const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem("token"));
-
-  const handleLogin = () => setLoggedIn(true);
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setLoggedIn(false);
-  };
+function AppRoutes() {
+  const { loggedIn, login, logout } = useAuth();
 
   return (
-    <BrowserRouter>
-      <Header loggedIn={loggedIn} onLogout={handleLogout} />
+    <>
+      <Header loggedIn={loggedIn} onLogout={logout} />
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -31,23 +25,31 @@ function App() {
             loggedIn ? (
               <Navigate to="/dashboard" replace />
             ) : (
-              <Login onLogin={handleLogin} />
+              <Login onLogin={login} />
             )
           }
         />
         <Route
           path="/dashboard"
           element={
-            <LoginRequired loggedIn={loggedIn}>
-              <Dashboard onLogout={handleLogout}/>
+            <LoginRequired>
+              <Dashboard />
             </LoginRequired>
           }
         />
       </Routes>
 
       <Footer />
-    </BrowserRouter>
+    </>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
+    </BrowserRouter>
+  );
+}

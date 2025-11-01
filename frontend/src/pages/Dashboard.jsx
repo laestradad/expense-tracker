@@ -1,31 +1,16 @@
 import { useState, useEffect } from "react";
+import { apiFetch } from "../api";
 
-export default function Dashboard({ onLogout }) {
+export default function Dashboard() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    
-    const fetchData = async () => {
-      const token = localStorage.getItem("token");
-      console.log("Token:", token);
-      const res = await fetch("/api/dashboard", {
-        headers: { "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json"}
-      });
-      
-      const data = await res.json();
-      setMessage(data.message || data.error);
-      
-      if (res.status === 401) {
-        onLogout();
-        window.location.href = "/login";
-        return;
-      }
-
-    };
-
-    fetchData();
-  }, []); //[] means: run this effect once
+  const fetchData = async () => {
+    const data = await apiFetch("/api/dashboard");
+    if (data) setMessage(data.message || data.error);
+  };
+  fetchData();
+  }, []);
 
   return <h2>{message}</h2>;
 }

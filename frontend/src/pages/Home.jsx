@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 export default function Home() {
   const [message, setMessage] = useState('')
 
+  // Simple public endpoint, no authentication needed
   useEffect(() => {
     fetch('/api/hello')
       .then(res => res.json())

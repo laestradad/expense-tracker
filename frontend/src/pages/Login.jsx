@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
+import { apiFetch } from "../api";
 
 export default function Login({ onLogin }) {
   const navigate = useNavigate();
@@ -17,31 +18,25 @@ export default function Login({ onLogin }) {
   }
   
   const handleSubmit = async (event) => {
-    event.preventDefault() // prevent page reload
+    event.preventDefault(); // prevent page reload
     setStatus("Sending...")
     try {
-        const res = await fetch('/auth/login', {
-          method: "POST",
-          headers: { "Content-Type": "application/json" }, // needed for flask
-          body: JSON.stringify(formData),
-        })
+      const data = await apiFetch("/auth/login", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      });
 
-        const data = await res.json()
-        
-        if (res.ok && data.token) {
-          localStorage.setItem("token", data.token);
-          setFormData({ username: "", password: ""}) // reset form
-          onLogin(); // update parent state
-          navigate("/dashboard"); // redirect
-          alert(data.message)
-        } else {
-          alert(data.error)
-          setStatus("Login failed");
-        }
-      } catch (err) {
-        console.error(err);
-        setStatus("Error sending message");
+      if (data.token) {
+        setFormData({ username: "", password: "" });
+        onLogin(data.token);
+        //navigate("/dashboard");
+        alert(data.message);
       }
+
+    } catch (err) {
+      alert(err.message); // debug
+      setStatus("Login failed");
+    }
   }
 
   return (
