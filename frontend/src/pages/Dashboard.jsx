@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
-import { apiFetch } from "../api";
+import UploadFile from "../components/UploadFile";
+import DashTable from "../components/DashTable.jsx";
+import DashPlot from "../components/DashPlot";
+import DashInsights from "../components/DashInsights";
 
 export default function Dashboard() {   
+  const [data, setData] = useState(null); // parent owns data
 
-  const [file, setFile] = useState(null);
-  const [title, setTitle] = useState("");
-  const [message, setMessage] = useState(""); 
-  
+  const handleDataLoaded = (newData) => {
+    setData(newData); // update state when upload completes
+  };
+
   // Test API request when authenticated
   useEffect(() => {
   const fetchData = async () => {
@@ -16,46 +20,31 @@ export default function Dashboard() {
   fetchData();
   }, []);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setMessage("Sending...")
-    
-    if (!file) return alert("Please select a CSV");
-
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("file", file);
-
-    try {
-      const data = await apiFetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      });
-      alert(JSON.stringify(data))
-      setMessage("Success")
-    } catch (err) {
-      alert(err.message); // debug
-      setStatus("Login failed");
-    }
-  }
-
-  return(
+  return (
     <div>
       <h1>Dashboard</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          autoComplete="off"
-          type="text"
-          name="title"
-          placeholder="Enter title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <input type="file" accept=".csv" onChange={(e) => setFile(e.target.files[0])} required/>
-        <button>Upload</button>
-      </form>
-      <p>{message}</p>
+
+      {!data || data.length === 0 ? (
+        <div>
+          <p>No data yet. Add a .csv file with your transactions below.</p>
+          <UploadFile onDataLoaded={handleDataLoaded} />
+          <button>Download Template</button>
+        </div>
+      ) : (
+        <div className="dashboard-container">
+          <div className="dashboard-item table">
+            <DashTable data={data} />
+          </div>
+          
+          <div className="dashboard-item plot">
+            <DashPlot data={data} />
+          </div>
+
+          <div className="dashboard-item insights">
+            <DashInsights data={data} />
+          </div>
+        </div>
+      )}
     </div>
-  )
+  );
 }
