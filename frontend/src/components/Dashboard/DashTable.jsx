@@ -1,3 +1,4 @@
+import "./Dashboard.css";
 
 export default function DashTable({ data }) {
   if (!data || data.length === 0) return <p>No data available</p>;

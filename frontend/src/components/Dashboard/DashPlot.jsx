@@ -1,4 +1,6 @@
 import Plot from "react-plotly.js";
+import { BaseLayoutDark } from "./plotlyStyles.js";
+import "./Dashboard.css";
 
 export default function DashPlot({ data }) {
   if (!data || data.length === 0) return <p>No data for plotting</p>;
@@ -21,13 +23,20 @@ export default function DashPlot({ data }) {
           },
         ]}
         layout={{
+          ...BaseLayoutDark,
+          width: null,      // let parent control width
           title: data.title || "Value by Date",
           xaxis: { title: "Date" },
           yaxis: { title: "Value" },
-          margin: { t: 40, r: 20, b: 40, l: 50 },
-          autosize: true,
+          dragmode: false, // disables box zoom drag
         }}
-        config={{ displayModeBar: false }}
+        config={{ 
+          displayModeBar: true,
+          scrollZoom: false, // disables mouse wheel zoom
+          modeBarButtonsToRemove: [
+            "toImage", "sendDataToCloud", "lasso2d", "select2d"
+          ],
+        }}
         useResizeHandler={true}
         style={{ width: "100%", height: "100%" }}
       />

@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import "./Dashboard.css";
 
 export default function DashInsights({ data }) {
   const { total, avg, max, min } = useMemo(() => {
@@ -12,7 +13,9 @@ export default function DashInsights({ data }) {
 
   return (
     <div className="insights-container">
-      <h3>Insights</h3>
+      <div className="insight-card">
+        <h3>Insights</h3>
+      </div>
       <div className="insight-card">
         <p>Total Value</p>
         <p>{total.toFixed(2)}</p>

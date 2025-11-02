@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import UploadFile from "../components/UploadFile";
-import DashTable from "../components/DashTable.jsx";
-import DashPlot from "../components/DashPlot";
-import DashInsights from "../components/DashInsights";
+import DashTable from "../components/Dashboard/DashTable.jsx";
+import DashPlot from "../components/Dashboard/DashPlot";
+import DashInsights from "../components/Dashboard/DashInsights";
 
 export default function Dashboard() {   
   const [data, setData] = useState(null); // parent owns data
