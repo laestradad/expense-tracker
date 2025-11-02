@@ -1,17 +1,11 @@
+from datetime import datetime, timedelta, UTC
+from flask import current_app as app
 from flask import Blueprint, request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
-#from ..extensions import jwt
-import jwt
-from datetime import datetime, timedelta, UTC
+from flask_jwt_extended import create_access_token, get_jwt_identity
+from models import users
 
 auth_bp = Blueprint("auth", __name__)
-
-# Demo User
-USERS = {
-    "luis": generate_password_hash("123456")
-}
-# Demo KEY
-SECRET_KEY = "TEST12345"
 
 @auth_bp.route("/login", methods=["POST"])
 def login():
@@ -23,15 +17,13 @@ def login():
     username = data.get("username", "")
     password = data.get("password", "")
     
-    print(f"Contact form submission: {username} / {password}")
-
-    if username not in USERS or not check_password_hash(USERS[username], password):
+    userData = users.get_userData(username)
+    if not userData or not check_password_hash(userData["hash"], password):
         return jsonify({"error": "Invalid credentials"}), 401
     
-    token = jwt.encode(
-        {"user_id": username, "exp": datetime.now(UTC) + timedelta(minutes=30)},
-        SECRET_KEY,
-        algorithm="HS256"
+    token = create_access_token(
+        identity = userData["id"],
+        expires_delta = timedelta(seconds=app.config["JWT_EXPIRATION"])
     )
 
     return jsonify({"token": token, "message": f"Thanks {username}, your message was received!"}), 200
