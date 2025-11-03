@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { apiFetch } from "../api";
 import UploadFile from "../components/UploadFile";
 import DashTable from "../components/Dashboard/DashTable.jsx";
 import DashPlot from "../components/Dashboard/DashPlot";

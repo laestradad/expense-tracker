@@ -5,8 +5,9 @@ import Footer from "./components/Footer";
 import LoginRequired from "./components/LoginRequired";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import About from "./pages/About";
+import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import ChangePsw from "./pages/ChangePsw";
 import "./App.css";
 
 function AppRoutes() {
@@ -18,7 +19,7 @@ function AppRoutes() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/register" element={<Register />} />
         <Route
           path="/login"
           element={
@@ -34,6 +35,13 @@ function AppRoutes() {
           element={
             <LoginRequired>
               <Dashboard />
+            </LoginRequired>
+          }
+        /><Route
+          path="/changepsw"
+          element={
+            <LoginRequired>
+              <ChangePsw />
             </LoginRequired>
           }
         />

@@ -6,15 +6,18 @@ export default function Header() {
 
   return (
     <nav>
-      <Link to="/"> Home </Link> |{ " " }
-      <Link to="/about"> About </Link> |{ " " }
+      <Link to="/">Home</Link> |{ " " }
       {loggedIn ? (
         <>
           <Link to="/dashboard">Dashboard</Link> |{ " " }
+          <Link to="/changepsw">Change Password</Link> |{ " " }
           <Link to="/login" onClick={logout}>Logout</Link>
         </>
         ) : (
-        <Link to="/login">Login</Link>
+        <>
+          <Link to="/login">Login</Link> |{ " " }
+          <Link to="/register">Register</Link>
+        </>
         )
       } 
     </nav>
