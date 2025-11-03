@@ -47,3 +47,22 @@ def changePsw(userid, newhash):
         return {"error": "database error"}, 500
     
 
+def deleteUser(userid):
+    sql = "DELETE FROM users WHERE id = %s"
+    # DELETE DATA ALSO FROM OTHER TABLES WHEN ADDED
+    try:
+        with db.pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(sql, (userid,))
+                conn.commit()
+
+                if cur.rowcount == 0:
+                    return {"error": "User not found"}, 404
+
+                return {"message": "User account deleted"}, 200
+
+    except Exception as e:
+        print(f"Database error: {e}")
+        return {"error": "database error"}, 500
+
+

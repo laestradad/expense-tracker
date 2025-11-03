@@ -82,7 +82,12 @@ def changepsw(user_id):
 
     return result
 
-
+@auth_bp.route("/delete", methods=["POST"])
+@login_required
+def delete(user_id):
+    result = users.deleteUser(user_id)
+    print(result)
+    return result
     
 
 

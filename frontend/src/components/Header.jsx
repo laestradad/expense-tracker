@@ -11,6 +11,7 @@ export default function Header() {
         <>
           <Link to="/dashboard">Dashboard</Link> |{ " " }
           <Link to="/changepsw">Change Password</Link> |{ " " }
+          <Link to="/delete">Delete Account</Link> |{ " " }
           <Link to="/login" onClick={logout}>Logout</Link>
         </>
         ) : (

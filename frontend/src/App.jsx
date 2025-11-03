@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import ChangePsw from "./pages/ChangePsw";
+import DeleteAccount from "./pages/DeleteAccount";
 import "./App.css";
 
 function AppRoutes() {
@@ -37,11 +38,20 @@ function AppRoutes() {
               <Dashboard />
             </LoginRequired>
           }
-        /><Route
+        />
+        <Route
           path="/changepsw"
           element={
             <LoginRequired>
               <ChangePsw />
+            </LoginRequired>
+          }
+        />
+        <Route
+          path="/delete"
+          element={
+            <LoginRequired>
+              <DeleteAccount />
             </LoginRequired>
           }
         />
