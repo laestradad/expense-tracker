@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { apiFetch } from "../api";
+import { apiFetch, downloadFile } from "../api";
 import UploadFile from "../components/UploadFile";
 import DashTable from "../components/Dashboard/DashTable.jsx";
 import DashPlot from "../components/Dashboard/DashPlot";
@@ -7,10 +7,6 @@ import DashInsights from "../components/Dashboard/DashInsights";
 
 export default function Dashboard() {   
   const [data, setData] = useState(null); // parent owns data
-
-  const handleDataLoaded = (newData) => {
-    setData(newData); // update state when upload completes
-  };
 
   // Test API request when authenticated
   useEffect(() => {
@@ -21,6 +17,18 @@ export default function Dashboard() {
   fetchData();
   }, []);
 
+  const handleDataLoaded = (newData) => {
+    setData(newData); // update state when upload completes
+  };
+
+  const handleDownload = async () => {
+    try {
+      await downloadFile("/api/download");
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
   return (
     <div>
       <h1>Dashboard</h1>
@@ -29,7 +37,7 @@ export default function Dashboard() {
         <div>
           <p>No data yet. Add a .csv file with your transactions below.</p>
           <UploadFile onDataLoaded={handleDataLoaded} />
-          <button>Download Template</button>
+          <button onClick={handleDownload}>Download Template</button>
         </div>
       ) : (
         <div className="dashboard-container">

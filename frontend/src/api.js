@@ -37,3 +37,17 @@ export async function apiFetch(url, options = {}) {
     throw err;
   }
 }
+
+export async function downloadFile(url) {
+  const token = localStorage.getItem("token");
+  const res = await fetch(url, { headers: { Authorization: token ? `Bearer ${token}` : "" } });
+
+  if (!res.ok) throw new Error("Download failed");
+
+  const blob = await res.blob();
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "sample.csv";
+  link.click();
+  URL.revokeObjectURL(link.href);
+}

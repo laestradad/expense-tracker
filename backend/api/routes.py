@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, send_from_directory, current_app
 from services.decorators import login_required
 from services.dataProcess import process_csv
 
@@ -14,6 +14,7 @@ def hello():
 @login_required
 def dashboard(user_id):
     return jsonify({"message": "Hello, you are authenticated!"})
+
 
 @api_bp.route('/upload', methods = ['POST'])
 def upload():
@@ -32,6 +33,13 @@ def upload():
     return jsonify({"title": title, "table": table_json, "message": "file received!"})
 
 
-
+@api_bp.route("/download")
+@login_required
+def download(user_id):
+    return send_from_directory(
+            directory=current_app.static_folder,
+            path="sample.csv",
+            as_attachment=True
+        )
 
 
