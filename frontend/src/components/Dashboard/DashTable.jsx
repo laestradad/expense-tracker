@@ -7,7 +7,8 @@ export default function DashTable({ data }) {
   const headers = Object.keys(data.table[0]);
 
   return (
-    <div className="table-wrapper">
+    <div>
+      <h2>Summary</h2>
       <table className="data-table">
         <thead>
           <tr>

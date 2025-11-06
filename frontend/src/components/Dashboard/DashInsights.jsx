@@ -13,23 +13,23 @@ export default function DashInsights({ data }) {
 
   return (
     <div className="insights-container">
-      <div className="insight-card">
-        <h3>Insights</h3>
+      <div className="insight-card two-col">
+        <h2>Insights</h2>
       </div>
       <div className="insight-card">
-        <p>Total Value</p>
+        <h3>Total Value</h3>
         <p>{total.toFixed(2)}</p>
       </div>
       <div className="insight-card">
-        <p>Average Value</p>
+        <h3>Average Value</h3>
         <p>{avg.toFixed(2)}</p>
       </div>
       <div className="insight-card">
-        <p>Highest Value</p>
+        <h3>Highest Value</h3>
         <p>{max.toFixed(2)}</p>
       </div>
       <div className="insight-card">
-        <p>Lowest Value</p>
+        <h3>Lowest Value</h3>
         <p>{min.toFixed(2)}</p>
       </div>
     </div>

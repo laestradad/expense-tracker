@@ -30,7 +30,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div>
+    <main>
       <h1>Dashboard</h1>
 
       {!data || data.length === 0 ? (
@@ -54,6 +54,6 @@ export default function Dashboard() {
           </div>
         </div>
       )}
-    </div>
+    </main>
   );
 }

@@ -1,22 +1,14 @@
 /* Dashboard general */
 .dashboard-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
-  max-width: 100%;   /* prevent horizontal overflow */
-}
-
-.dashboard-item.plot {
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  padding: 0 2rem;
   max-width: 100%;
-  overflow: hidden;
+  margin-bottom: 100px;
 }
 
 /* Dashboard Table */
-.table-wrapper {
-  overflow-x: auto;
-  border-radius: 0.5rem;
-}
-
 .data-table {
   width: 100%;
   border-collapse: collapse;
@@ -31,7 +23,6 @@
 }
 
 .data-table th {
-  font-weight: 600;
   background-color: #646cff;
 }
 
@@ -40,6 +31,11 @@
 }
 
 /* Dashboard Plot */
+.dashboard-item.plot {
+  max-width: 100%;
+  overflow: hidden;
+}
+
 .plot-container {
   width: 100%;
   max-width: 100%;
@@ -54,22 +50,25 @@
   gap: 1rem;
 }
 
-.insight-card {
-  background: #646cff;
-  border-radius: 0.75rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  padding: 1rem;
-  text-align: center;
+.insights-container h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
 }
 
-.insight-card p {
+.insights-container p {
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 400;
   margin-top: 0.5rem;
 }
 
-.insight-card h3 {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-top: 1rem;
+.insight-card {
+  background: #646cff;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 6px #7f84e4b0;
+  padding: 0.3rem;
+  text-align: center;
+}
+
+.insight-card.two-col {
+  grid-column: span 2;
 }
