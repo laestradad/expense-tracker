@@ -1,6 +1,11 @@
-id,name,value,date
-1,Apple,12,2025-01-01
-2,Banana,8,2025-01-02
-3,Cherry,15,2025-01-03
-4,Date,5,2025-01-04
-5,Elderberry,20,2025-01-05
+date,category,amount,comment
+2025-01-01,Salary,1000,
+2025-01-01,Gift,100,
+2025-01-01,Other,50,casino
+2025-01-01,Food,200,
+2025-01-01,Housing,500,
+2025-01-01,Utilities,100,
+2025-01-01,Transport,50,
+2025-01-01,Health,80,
+2025-01-01,Leisure,50,
+2025-01-01,Other,10,barber
