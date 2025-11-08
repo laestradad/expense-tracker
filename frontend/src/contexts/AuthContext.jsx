@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { setLogoutHandler } from "../api";
+import { setLogoutHandler } from "@/api/api";
 
 const AuthContext = createContext();
 

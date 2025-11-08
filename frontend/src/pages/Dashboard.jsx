@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { apiFetch, downloadFile } from "../api";
-import UploadFile from "../components/UploadFile";
-import DashTable from "../components/Dashboard/DashTable.jsx";
-import DashPlot from "../components/Dashboard/DashPlot";
-import DashInsights from "../components/Dashboard/DashInsights";
+import { apiFetch, downloadFile } from "@/api/api";
+import UploadFile from "@/components/upload/UploadFile";
+import DashTable from "@/components/dashboard/DashTable.jsx";
+import DashPlot from "@/components/dashboard/DashPlot";
+import DashInsights from "@/components/dashboard/DashInsights";
 
 export default function Dashboard() {   
   const [data, setData] = useState(null); // parent owns data

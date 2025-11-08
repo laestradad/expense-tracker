@@ -22,6 +22,14 @@ export default defineConfig([
         sourceType: 'module',
       },
     },
+    settings: {
+      "import/resolver": {
+        alias: {
+          map: [["@", path.resolve("./src")]],
+          extensions: [".js", ".jsx"],
+        },
+      },
+    },
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },

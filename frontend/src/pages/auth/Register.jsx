@@ -1,44 +1,50 @@
 import { useState } from "react";
-import { apiFetch } from "../api";
+import { useNavigate } from "react-router-dom";
+import { apiFetch } from "@/api/api";
 
-export default function Login({ onLogin }) {
+export default function Register() {
+  const navigate = useNavigate();
 
   const [status, setStatus] = useState("")
 
   const [formData, setFormData] = useState({
     username: "",
-    password: ""
+    password: "",
+    confirmation: ""
   })
 
   const handleChange = (event) => {
     const { name, value } = event.target
     setFormData(prev => ({ ...prev, [name]: value }))
   }
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault(); // prevent page reload
     setStatus("Sending...")
     try {
-      const data = await apiFetch("/auth/login", {
+      const data = await apiFetch("/auth/register", {
         method: "POST",
         body: JSON.stringify(formData),
       });
 
-      if (data.token) {
-        setFormData({ username: "", password: "" });
-        onLogin(data.token);
+      if (data.message) {
+        setFormData({ username: "", password: "", confirmation: "" });
         alert(data.message);
+        navigate("/login");
+      }
+
+      if (data.error) {
+        setStatus(data.error);
       }
 
     } catch (err) {
-      alert(err.message); // debug
-      setStatus("Login failed");
+      alert(err.message);
     }
-  }
-
+  };
+  
   return (
     <div>
-      <h1>Login Page</h1>
+      <h1>Register Page</h1>
       <form onSubmit={handleSubmit}>
         <input
           autoComplete="off"
@@ -57,7 +63,15 @@ export default function Login({ onLogin }) {
           onChange={handleChange}
           required
         />
-        <button>Log in</button>
+        <input
+          type="password"
+          name="confirmation"
+          placeholder="Enter password"
+          value={formData.confirmation}
+          onChange={handleChange}
+          required
+        />
+        <button>Sign up</button>
       </form>
       <p>{status}</p>
     </div>
