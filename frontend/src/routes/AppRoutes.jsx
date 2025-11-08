@@ -9,6 +9,7 @@ import LoginReqLayout from "@/layouts/LoginReqLayout";
 import Home from "@/pages/Home";
 import Login from "@/pages/auth/Login";
 import Register from "@/pages/auth/Register";
+import Account from "@/pages/auth/Account";
 import ChangePsw from "@/pages/auth/ChangePsw";
 import DeleteAccount from "@/pages/auth/DeleteAccount";
 import Dashboard from "@/pages/Dashboard";
@@ -35,6 +36,7 @@ export default function AppRoutes() {
 
       <Route element={<LoginReqLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/account" element={<Account />} />
         <Route path="/changepsw" element={<ChangePsw />} />
         <Route path="/delete" element={<DeleteAccount />} />
       </Route>

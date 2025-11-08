@@ -69,3 +69,13 @@
     border-top: 1px solid #333;
   }
 }
+
+/* ACCOUNT */
+.acc-container{
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  gap: 1em;
+  max-width: 300px;
+  margin: 0 auto;
+}
