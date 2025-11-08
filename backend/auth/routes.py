@@ -6,7 +6,9 @@ from flask_jwt_extended import create_access_token
 from services.decorators import login_required
 from models import users
 
+
 auth_bp = Blueprint("auth", __name__)
+
 
 @auth_bp.route("/login", methods=["POST"])
 def login():
@@ -33,6 +35,7 @@ def login():
 
     return jsonify({"token": token, "message": f"Thanks {username}, your message was received!"}), 200
 
+
 @auth_bp.route("/register", methods=["POST"])
 def register():
     data = request.get_json()    
@@ -53,6 +56,7 @@ def register():
     result = users.registerUser(username, generate_password_hash(password))
 
     return result
+
 
 @auth_bp.route("/changepsw", methods=["POST"])
 @login_required
@@ -81,6 +85,7 @@ def changepsw(user_id):
     result = users.changePsw(user_id, generate_password_hash(newpsw))
 
     return result
+
 
 @auth_bp.route("/delete", methods=["POST"])
 @login_required

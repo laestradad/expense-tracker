@@ -1,6 +1,10 @@
 from flask import Blueprint, request, jsonify, send_from_directory, current_app
+from datetime import datetime
 from services.decorators import login_required
 from services.dataProcess import process_csv
+from models import transactions
+from models import categories
+
 
 api_bp = Blueprint("api", __name__)
 
@@ -43,3 +47,72 @@ def download(user_id):
         )
 
 
+@api_bp.route("/transactions", methods=["GET"])
+@login_required
+def get_transactions(user_id):
+    result = transactions.getTransactions(user_id)
+    return jsonify(result), 200
+
+
+@api_bp.route("/transactions", methods=["POST"])
+@login_required
+def create_transaction(user_id):
+    data = request.json
+    
+    category_id = data["category_id"]
+    amount = data["amount"]
+    tran_date_str = data["transaction_date"]
+    comment = data.get("comment")
+
+    if not category_id or not amount or not tran_date_str:
+        return jsonify({"error": "Missing required fields"}), 400
+    
+    if not isinstance(amount, (int, float)):
+        return jsonify({"error": "Amount must be number"}), 400
+    
+    try:
+        transaction_date = datetime.strptime(tran_date_str, "%Y-%m-%d").date()
+    except ValueError:
+        return jsonify({"error": "transaction_date must be YYYY-MM-DD"}), 400
+
+    result, status = transactions.createTransaction(user_id, category_id, amount, comment, transaction_date)
+    return jsonify(result), status
+
+
+@api_bp.route("/transactions/<int:transaction_id>", methods=["PUT"])
+@login_required
+def update_transaction(user_id, transaction_id):
+    data = request.json
+
+    category_id = data["category_id"]
+    amount = data["amount"]
+    tran_date_str = data["transaction_date"]
+    comment = data.get("comment")
+
+    if not category_id or not amount or not tran_date_str:
+        return jsonify({"error": "Missing required fields"}), 400
+    
+    if not isinstance(amount, (int, float)):
+        return jsonify({"error": "Amount must be number"}), 400
+    
+    try:
+        transaction_date = datetime.strptime(tran_date_str, "%Y-%m-%d").date()
+    except ValueError:
+        return jsonify({"error": "transaction_date must be YYYY-MM-DD"}), 400
+
+    result, status = transactions.updateTransaction(transaction_id, category_id, amount, comment, transaction_date)
+    return jsonify(result), status
+
+
+@api_bp.route("/transactions/<int:transaction_id>", methods=["DELETE"])
+@login_required
+def delete_transaction(user_id, transaction_id):
+    result, status = transactions.deleteTransaction(transaction_id)
+    return jsonify(result), status
+
+
+@api_bp.route("/categories", methods=["GET"])
+@login_required
+def get_categories(user_id):
+    result, status = categories.getCategories(user_id)
+    return jsonify(result), status
