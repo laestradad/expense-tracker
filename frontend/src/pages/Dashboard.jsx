@@ -9,11 +9,12 @@ export default function Dashboard() {
   // Tab visible
   const [active, setActive] = useState('tab1'); 
   
-  // Categories fetch, used for Modal
+  // Categories and Transactions fetch
   const [categories, setCategories] = useState([]); 
+  const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchCategories = async () => {
       try {
         const result = await apiFetch("/api/categories");
         const dropdownOptions = result.map(c => ({
@@ -26,6 +27,15 @@ export default function Dashboard() {
         console.error("Error fetching transactions:", error);
       }
     };
+    const fetchData = async () => {
+        try {
+          const result = await apiFetch("/api/transactions");
+          setTransactions(result || []);
+        } catch (error) {
+          console.error("Error fetching transactions:", error);
+        }
+      };
+    fetchCategories();
     fetchData();
   }, []);
 
@@ -33,7 +43,7 @@ export default function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
   
-  const handleOpen = (idx) => {
+  const handleOpen = (idx = null) => {  // idx is optional now
     setEditIndex(idx);
     setModalOpen(true);
   };
@@ -47,22 +57,11 @@ export default function Dashboard() {
     console.log("Form data to backend:", formData);
     handleCloseModal();
   };
-
   
-
-  {/* TEST DATA */}
-  const testData = [
-    { id: 1, transaction_date: "2025-01-05", category_name: "Salary", amount: 2000, category_type: "income", comment: "Paycheck" },
-    { id: 2, transaction_date: "2025-01-12", category_name: "Food", amount: 150, category_type: "expense", comment: "Groceries" },
-    { id: 3, transaction_date: "2025-02-01", category_name: "Salary", amount: 2200, category_type: "income", comment: "Salary" },
-    { id: 4, transaction_date: "2025-02-10", category_name: "Food", amount: 300, category_type: "expense", comment: "Restaurant" },
-    { id: 5, transaction_date: "2025-03-03", category_name: "Salary", amount: 1800, category_type: "income", comment: "Freelance" },
-    { id: 6, transaction_date: "2025-03-08", category_name: "Utilities", amount: 400, category_type: "expense", comment: "Bills" },
-  ];
-
-
-
-
+  const handleDeleteModal = (formData) => {
+    console.log("Data to delete:", formData);
+    handleCloseModal();
+  };
 
   return (
     <div className="tabs-container">
@@ -84,14 +83,17 @@ export default function Dashboard() {
           {active === 'tab1' && 
             <>
               <DashTable
+                data={transactions}
                 openModal={handleOpen}
               />
               <EditModal
                 isOpen={modalOpen}
                 onClose={handleCloseModal}
                 onSubmit={handleSubmitModal}
+                onDelete={handleDeleteModal}
                 categories={categories}
-                initialData={testData[editIndex] || {}}
+                initialData={editIndex !== null ? transactions[editIndex] : {}}
+                canDelete={editIndex !== null} 
               />
             </>
           }

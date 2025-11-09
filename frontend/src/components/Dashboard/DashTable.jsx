@@ -5,26 +5,7 @@ import { MdOutlineAddBox } from "react-icons/md";
 import { apiFetch } from "@/api/api";
 import "./Dashboard.css";
 
-export default function DashTable({ openModal }) {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await apiFetch("/api/transactions");
-        setData(result || []);
-      } catch (error) {
-        console.error("Error fetching transactions:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
-  if (loading) return <p>Loading...</p>;
+export default function DashTable({ data, openModal }) {
 
   return (
     <>

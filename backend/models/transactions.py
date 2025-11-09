@@ -10,6 +10,7 @@ def getTransactions(user_id):
     TO_CHAR(t.transaction_date, 'YYYY-MM-DD') AS transaction_date,
     t.amount,
     t.comment,
+    c.id AS category_id,
     c.name AS category_name,
     c.type AS category_type
     FROM transactions t JOIN categories c ON t.category_id = c.id

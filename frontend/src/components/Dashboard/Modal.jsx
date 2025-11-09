@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export default function EditModal({
   isOpen,
   onClose,
   onSubmit,
+  onDelete,
   categories = [],
   initialData = {},
+  canDelete,
 }) {
   const [formData, setFormData] = useState({
     transaction_date: "",
@@ -35,6 +37,11 @@ export default function EditModal({
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);
+  };
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    onDelete(formData);
   };
 
   return (
@@ -96,7 +103,7 @@ export default function EditModal({
           <div className="modal-actions">
             <button type="submit">Submit</button>
             <button type="button" onClick={onClose}>Cancel</button>
-            <button type="button" onClick={onClose}>Delete</button>
+            {canDelete && <button type="button" onClick={handleDelete}>Delete</button>}
           </div>
         </form>
       </div>
