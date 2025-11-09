@@ -4,6 +4,7 @@ from services.decorators import login_required
 from services.dataProcess import process_csv
 from models import transactions
 from models import categories
+from models import insights
 
 
 api_bp = Blueprint("api", __name__)
@@ -12,12 +13,6 @@ api_bp = Blueprint("api", __name__)
 @api_bp.route("/hello", methods=["GET"])
 def hello():
     return jsonify(message="Hello from Flask!")
-
-
-@api_bp.route("/dashboard")
-@login_required
-def dashboard(user_id):
-    return jsonify({"message": "Hello, you are authenticated!"})
 
 
 @api_bp.route('/upload', methods = ['POST'])
@@ -115,4 +110,46 @@ def delete_transaction(user_id, transaction_id):
 @login_required
 def get_categories(user_id):
     result, status = categories.getCategories(user_id)
+    return jsonify(result), status
+
+
+@api_bp.route("/insights/balance", methods=["GET"])
+@login_required
+def get_monthly_balance(user_id):
+    # Example: GET /insights/balance?date=2025-10-01
+    date_par = request.args.get("date")
+    try:
+        date = datetime.strptime(date_par, "%Y-%m-%d").date()
+    except ValueError:
+        return jsonify({"error": "date must be YYYY-MM-DD"}), 400
+    
+    result, status = insights.getMonthlyBalance(user_id, date)
+    return jsonify(result), status
+
+
+@api_bp.route("/insights/categories", methods=["GET"])
+@login_required
+def get_total_by_category(user_id):
+    # Example: GET /insights/categories?date=2025-10-01
+    date_par = request.args.get("date")
+    try:
+        date = datetime.strptime(date_par, "%Y-%m-%d").date()
+    except ValueError:
+        return jsonify({"error": "date must be YYYY-MM-DD"}), 400
+    
+    result, status = insights.getTotalByCategory(user_id, date)
+    return jsonify(result), status
+
+
+@api_bp.route("/insights/inout", methods=["GET"])
+@login_required
+def get_total_in_out(user_id):
+    # Example: GET /insights/inout?date=2025-10-01
+    date_par = request.args.get("date")
+    try:
+        date = datetime.strptime(date_par, "%Y-%m-%d").date()
+    except ValueError:
+        return jsonify({"error": "date must be YYYY-MM-DD"}), 400
+    
+    result, status = insights.getTotalInOut(user_id, date)
     return jsonify(result), status

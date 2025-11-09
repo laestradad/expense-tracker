@@ -6,8 +6,8 @@ def getTransactions(user_id):
     
     sql = "SELECT * FROM transactions WHERE user_id = %s"
     parameters = (user_id,)
-    row = db.select_query(sql, parameters)
-    return row
+    rows = db.select_query(sql, parameters)
+    return rows
 
 
 def createTransaction(user_id, category_id, amount, comment=None, transaction_date=None):
