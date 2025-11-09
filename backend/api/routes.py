@@ -113,6 +113,13 @@ def get_categories(user_id):
     return jsonify(result), status
 
 
+@api_bp.route("/monthslist", methods=["GET"])
+@login_required
+def get_user_months(user_id):
+    result, status = insights.getUserMonths(user_id)
+    return jsonify(result), status
+
+
 @api_bp.route("/insights/balance", methods=["GET"])
 @login_required
 def get_monthly_balance(user_id):

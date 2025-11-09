@@ -43,6 +43,7 @@ export default function EditModal({
         <h2>Edit Transaction</h2>
 
         <form className="form-modal" onSubmit={handleSubmit}>
+
           <div className="form-group">
             <label>Transaction Date: </label>
             <input
@@ -54,6 +55,23 @@ export default function EditModal({
             />
           </div>
 
+          <div className="form-group">
+            <label>Category: </label>
+            <select
+              name="category_id"
+              value={formData.category_id}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select Category</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          
           <div className="form-group">
             <label>Amount: </label>
             <input
@@ -73,23 +91,6 @@ export default function EditModal({
               value={formData.comment}
               onChange={handleChange}
             />
-          </div>
-
-          <div className="form-group">
-            <label>Category: </label>
-            <select
-              name="category_id"
-              value={formData.category_id}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select Category</option>
-              {categories.map((cat) => (
-                <option key={cat.id} value={cat.id}>
-                  {cat.name}
-                </option>
-              ))}
-            </select>
           </div>
 
           <div className="modal-actions">

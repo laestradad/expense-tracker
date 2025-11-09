@@ -83,6 +83,24 @@ input {
   height: 2em;
 }
 
+select {
+  appearance: none;
+
+  padding: 0.6em 1em;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.25s, background-color 0.25s;
+}
+
+select:hover,
+select:focus {
+  border-color: #646cff;
+  outline: none;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

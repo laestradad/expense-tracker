@@ -1,17 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DashTable from "@/components/dashboard/DashTable.jsx";
 import EditModal from "@/components/dashboard/Modal.jsx";
-
 import DashMonth from "@/components/dashboard/DashMonth";
 import PlotTrend from "@/components/dashboard/PlotTrend";
+import { apiFetch } from "@/api/api";
 
 export default function Dashboard() {
-  const [active, setActive] = useState('tab1');
+  // Tab visible
+  const [active, setActive] = useState('tab1'); 
   
+  // Categories fetch, used for Modal
+  const [categories, setCategories] = useState([]); 
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await apiFetch("/api/categories");
+        const dropdownOptions = result.map(c => ({
+          id: c.id,
+          name: c.name
+        }));
+        setCategories(dropdownOptions || []);
+
+      } catch (error) {
+        console.error("Error fetching transactions:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // Modal Management
   const [modalOpen, setModalOpen] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
   
-   const handleEdit = (idx) => {
+  const handleOpen = (idx) => {
     setEditIndex(idx);
     setModalOpen(true);
   };
@@ -37,12 +59,6 @@ export default function Dashboard() {
     { id: 5, transaction_date: "2025-03-03", category_name: "Salary", amount: 1800, category_type: "income", comment: "Freelance" },
     { id: 6, transaction_date: "2025-03-08", category_name: "Utilities", amount: 400, category_type: "expense", comment: "Bills" },
   ];
-  const categories = [
-    { id: 1, name: "Salary" },
-    { id: 2, name: "Food" },
-    { id: 3, name: "Utilities" },
-    { id: 4, name: "Entertainment" },
-  ]
 
 
 
@@ -68,8 +84,7 @@ export default function Dashboard() {
           {active === 'tab1' && 
             <>
               <DashTable
-                rows={testData}
-                editRow={handleEdit}
+                openModal={handleOpen}
               />
               <EditModal
                 isOpen={modalOpen}
@@ -80,7 +95,7 @@ export default function Dashboard() {
               />
             </>
           }
-            {active === 'tab2' && <DashMonth rows={testData} />}
+            {active === 'tab2' && <DashMonth />}
             {active === 'tab3' && <PlotTrend />}
         </div>
     </div>

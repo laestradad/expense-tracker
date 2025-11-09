@@ -50,3 +50,21 @@ def getTotalInOut(user_id,date):
     parameters = (user_id,date)
     rows = db.select_query(sql, parameters, as_dict=True)
     return rows, 201
+
+
+def getUserMonths(user_id):
+    sql = """
+        SELECT 
+            to_char(month_start, 'YYYY-MM-DD') AS date,
+            trim(to_char(month_start, 'MONTH YYYY')) AS value
+        FROM (
+            SELECT DISTINCT date_trunc('month', transaction_date)::date AS month_start
+            FROM transactions
+            WHERE transaction_date IS NOT NULL
+              AND user_id = %s
+        ) m
+        ORDER BY month_start;
+    """
+    parameters = (user_id,)
+    result = db.select_query(sql, parameters, as_dict=True)
+    return result, 201

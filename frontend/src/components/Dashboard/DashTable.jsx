@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { FaArrowAltCircleUp , FaArrowAltCircleDown  } from "react-icons/fa";
 import { BsFillPencilFill } from "react-icons/bs";
+import { MdOutlineAddBox } from "react-icons/md";
 import { apiFetch } from "@/api/api";
 import "./Dashboard.css";
 
-export default function DashTable({ rows, editRow }) {
+export default function DashTable({ openModal }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -27,6 +28,10 @@ export default function DashTable({ rows, editRow }) {
 
   return (
     <>
+    <div style={{marginBottom: '2rem'}}>
+      <button onClick={() => openModal()}><MdOutlineAddBox size={15}/> Add new</button>
+    </div>
+    
     {data && data.length > 0 ? (
       <div className="table-wrapper">
         <table className="data-table">
@@ -54,7 +59,7 @@ export default function DashTable({ rows, editRow }) {
                   <td>
                     <span className="actions">
                       <BsFillPencilFill
-                        onClick={() => editRow(idx)}
+                        onClick={() => openModal(idx)}
                       />
                     </span>
                   </td>
