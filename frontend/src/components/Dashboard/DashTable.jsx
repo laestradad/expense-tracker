@@ -1,8 +1,8 @@
 import "./Dashboard.css";
-import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
+import { BsFillPencilFill } from "react-icons/bs";
 import { FaArrowAltCircleUp , FaArrowAltCircleDown  } from "react-icons/fa";
 
-export default function DashTable({ rows, deleteRow, editRow }) {
+export default function DashTable({ rows, editRow }) {
   
 
   return (
@@ -32,9 +32,6 @@ export default function DashTable({ rows, deleteRow, editRow }) {
                 <td className="hide-on-small">{row.comment}</td>
                 <td>
                   <span className="actions">
-                    <BsFillTrashFill 
-                      onClick={() => deleteRow(idx)}
-                    />
                     <BsFillPencilFill
                       onClick={() => editRow(idx)}
                     />

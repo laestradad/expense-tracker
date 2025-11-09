@@ -2,7 +2,7 @@ import Plot from "react-plotly.js";
 import { BaseLayoutDark } from "./plotlyStyles.js";
 import "./Dashboard.css";
 
-export default function DashPlot({ data }) {
+export default function PlotRadial({ data }) {
   if (!data || data.length === 0) return <p>No data for plotting</p>;
 
   const dates = data.table.map((d) => d.date);
