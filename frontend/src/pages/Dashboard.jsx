@@ -5,7 +5,26 @@ import DashInsights from "@/components/dashboard/DashInsights";
 
 export default function Dashboard() {
   const [active, setActive] = useState('tab1');
-
+  
+  // Mock test data
+  const testData = [
+    {
+      id: 1,
+      transaction_date: "2025-11-09",
+      category_type: "income",
+      category_name: "Salary",
+      amount: 5000,
+      comment: "Monthly salary",
+    },
+    {
+      id: 2,
+      transaction_date: "2025-11-08",
+      category_type: "expense",
+      category_name: "Groceries",
+      amount: 150,
+      comment: "Weekly groceries",
+    },
+  ];
   return (
     <div className="tabs-container">
         <h1>
@@ -25,7 +44,7 @@ export default function Dashboard() {
 
         {/* Tab content */}
         <div className="tab-content">
-            {active === 'tab1' && <DashTable />}
+            {active === 'tab1' && <DashTable rows={testData}/>}
             {active === 'tab2' && <DashPlot />}
             {active === 'tab3' && <DashInsights />}
         </div>

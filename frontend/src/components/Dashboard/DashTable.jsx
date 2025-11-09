@@ -1,30 +1,48 @@
 import "./Dashboard.css";
+import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
+import { FaArrowAltCircleUp , FaArrowAltCircleDown  } from "react-icons/fa";
 
-export default function DashTable({ data }) {
-  if (!data || data.length === 0) return <p>No data available</p>;
-
-  // Assume data = array of objects
-  const headers = Object.keys(data.table[0]);
+export default function DashTable({ rows, deleteRow, editRow }) {
+  
 
   return (
-    <div>
-      <h2>Summary</h2>
+    <div className="table-wrapper">
       <table className="data-table">
         <thead>
           <tr>
-            {headers.map((key) => (
-              <th key={key}>{key.toUpperCase()}</th>
-            ))}
+            <th>Date</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th className="hide-on-small">Comment</th>
+            <th>Actions</th>
           </tr>
         </thead>
+        
         <tbody>
-          {data.table.map((row, i) => (
-            <tr key={i}>
-              {headers.map((key) => (
-                <td key={key}>{row[key]}</td>
-              ))}
-            </tr>
-          ))}
+          {rows.map((row, idx) => {
+            
+            return (
+              <tr key={row.id}>
+                <td>{row.transaction_date}</td>
+                <td>
+                  {row.category_type === "income" ? <FaArrowAltCircleUp color="#17b117"/> : <FaArrowAltCircleDown color="#ce4646ff"/>}
+                  {" "}{row.category_name}
+                </td>
+                <td>${" "}{row.amount}</td>
+                <td className="hide-on-small">{row.comment}</td>
+                <td>
+                  <span className="actions">
+                    <BsFillTrashFill 
+                      onClick={() => deleteRow(idx)}
+                    />
+                    <BsFillPencilFill
+                      onClick={() => editRow(idx)}
+                    />
+                  </span>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
