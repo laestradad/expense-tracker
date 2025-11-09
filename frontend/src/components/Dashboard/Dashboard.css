@@ -1,11 +1,27 @@
 /* Dashboard general */
-.dashboard-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
-  padding: 0 2rem;
-  max-width: 100%;
-  margin-bottom: 100px;
+.tabs {
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 500px;
+  gap: 1rem;
+  border-bottom: 1px solid #ccc;
+  padding: 2rem;
+  margin: 0 auto;
+}
+
+.button-tab {
+  border-radius: 20px;
+  transition: border-color 0.25s, background-color 0.25s, color 0.25s;
+}
+
+.button-tab.active {
+  border-color: #646cff;
+  background-color: #646cff;
+  font-weight: 500;
+}
+
+.tab-content {
+  padding: 2rem;
 }
 
 /* Dashboard Table */

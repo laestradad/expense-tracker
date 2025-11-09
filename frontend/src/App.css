@@ -74,8 +74,9 @@
 .acc-container{
   display: flex;
   flex-direction: column;
-  padding: 1em;
+  padding: 2em;
   gap: 1em;
   max-width: 300px;
   margin: 0 auto;
+  border-top: 1px solid #ccc;
 }

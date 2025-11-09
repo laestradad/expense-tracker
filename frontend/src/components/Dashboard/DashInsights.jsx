@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import "./Dashboard.css";
 
 export default function DashInsights({ data }) {
+  if (!data || data.length === 0) return <p>No data for insights</p>;
   const { total, avg, max, min } = useMemo(() => {
     const values = data.table.map((d) => d.value);
     const total = values.reduce((a, b) => a + b, 0);

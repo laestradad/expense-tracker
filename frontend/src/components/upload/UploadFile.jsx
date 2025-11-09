@@ -1,11 +1,18 @@
 import { useState } from "react";
-import { apiFetch } from "@/api/api";
+import { apiFetch, downloadFile } from "@/api/api";
 
-export default function UploadFile({ onDataLoaded }) {   
+export default function UploadFile() {   
 
   const [file, setFile] = useState(null);
-  const [title, setTitle] = useState("");
   const [message, setMessage] = useState(""); 
+
+  const handleDownload = async () => {
+    try {
+      await downloadFile("/api/download");
+    } catch (err) {
+      alert(err.message);
+    }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -14,7 +21,6 @@ export default function UploadFile({ onDataLoaded }) {
     if (!file) return alert("Please select a CSV");
 
     const formData = new FormData();
-    formData.append("title", title);
     formData.append("file", file);
 
     try {
@@ -36,21 +42,13 @@ export default function UploadFile({ onDataLoaded }) {
   }
 
   return(
-    <div>
+    <div style={{ marginBottom: '2rem' }}>
       <form onSubmit={handleSubmit}>
-        <input
-          autoComplete="off"
-          type="text"
-          name="title"
-          placeholder="Enter title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <input type="file" accept=".csv" onChange={(e) => setFile(e.target.files[0])} required/>
+        <input type="file" accept=".csv" onChange={(e) => setFile(e.target.files[0])} required/> Import a .csv file with your transactions
         <button>Upload</button>
       </form>
       <p>{message}</p>
+      <button onClick={handleDownload}>Download Template</button>
     </div>
   )
 }
