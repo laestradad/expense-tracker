@@ -4,9 +4,19 @@ from services import db
 
 def getTransactions(user_id):
     
-    sql = "SELECT * FROM transactions WHERE user_id = %s"
+    sql = """
+    SELECT 
+    t.id AS id,
+    TO_CHAR(t.transaction_date, 'YYYY-MM-DD') AS transaction_date,
+    t.amount,
+    t.comment,
+    c.name AS category_name,
+    c.type AS category_type
+    FROM transactions t JOIN categories c ON t.category_id = c.id
+    WHERE t.user_id = %s
+    """
     parameters = (user_id,)
-    rows = db.select_query(sql, parameters)
+    rows = db.select_query(sql, parameters, as_dict=True)
     return rows
 
 
