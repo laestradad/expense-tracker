@@ -89,3 +89,35 @@ def process_csv(file, user_id):
     except Exception as e:
         print(f"Upload error: {e}")
         return ({"error": str(e)}), 500
+    
+
+def getSunburstData(totals):
+
+    labels = []
+    parents = []
+    values = []
+
+    # Root nodes
+    income_total = sum(float(r["total_amount"]) for r in totals if r["category_type"] == "income")
+    expense_total = sum(float(r["total_amount"]) for r in totals if r["category_type"] == "expense")
+
+    # Add top-level categories (Income, Expenses)
+    labels.extend(["Income", "Expenses"])
+    parents.extend(["", ""])
+    values.extend([income_total, expense_total])
+
+    # Add income subcategories
+    for r in totals:
+        if r["category_type"] == "income":
+            labels.append(r["category_name"])
+            parents.append("Income")
+            values.append(float(r["total_amount"]))
+
+    # Add expense subcategories
+    for r in totals:
+        if r["category_type"] == "expense":
+            labels.append(r["category_name"])
+            parents.append("Expenses")
+            values.append(float(r["total_amount"]))
+
+    return ({ "labels": labels, "parents": parents, "values": values }), 201

@@ -1,48 +1,62 @@
+import { useState, useEffect } from "react";
 import Plot from "react-plotly.js";
 import { BaseLayoutDark } from "./plotlyStyles.js";
+import { apiFetch } from "@/api/api";
 import "./Dashboard.css";
 
-export default function PlotRadial({ data }) {
-  if (!data || data.length === 0) return <p>No data for plotting</p>;
+export default function PlotRadial({ selectedMonth }) {
+  const [data, setData] = useState(null);
 
-  const dates = data.table.map((d) => d.date);
-  const values = data.table.map((d) => d.value);
-  const names = data.table.map((d) => d.name);
+  const fetchData = async () => {
+      try {
+        const result = await apiFetch(`/api/plots/sunburst?date=${selectedMonth}`);
+        setData(result || []);
+      } catch (error) {
+        console.error("Error fetching sunburst data:", error);
+      }
+    };
+    
+  useEffect(() => {
+    if (selectedMonth) {
+      fetchData();
+    }
+  }, [selectedMonth]);
 
-  return (
-    <>
-      <h2>Plot example</h2>
-      <div className="plot-container">
-        <Plot
-          data={[
-            {
-              x: dates,
-              y: values,
-              type: "bar",
-              text: names,
-              hoverinfo: "x+y+text",
-              marker: { color: "#3b82f6" },
-            },
-          ]}
-          layout={{
+  const PlotData = [
+    {
+      type: "sunburst",
+      labels: data?.labels,
+      parents: data?.parents,
+      values: data?.values,
+      branchvalues: "total",
+      leaf: { opacity: 0.6 },
+      marker: { line: { width: 2 }}
+    },
+  ];
+
+  const layout={
             ...BaseLayoutDark,
             width: null,
-            title: data.title || "Value by Date",
-            xaxis: { title: "Date" },
-            yaxis: { title: "Value" },
-          }}
-          config={{ 
+            colorway: ["#ef4444", "#22c55e"],
+            font: {
+              family: "Inter, sans-serif",
+              size: 14,
+              color: "#e2e8f0",
+            },
+          }
+
+  const config={ 
             displaylogo: false,
             displayModeBar: true,
             scrollZoom: false,
             modeBarButtonsToRemove: [
               "toImage", "sendDataToCloud", "lasso2d", "select2d"
             ],
-          }}
-          useResizeHandler={true}
-          style={{ width: "100%", height: "100%" }}
-        />
-      </div>
-    </>
+          }
+
+  return (
+    <div className="plot-container">
+      <Plot data={PlotData} layout={layout} config={config} useResizeHandler={true} style={{ width: "100%", height: "100%" }} />
+    </div>
   );
 }

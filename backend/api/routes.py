@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, send_from_directory, current_app
 from datetime import datetime
 from services.decorators import login_required
-from services.dataProcess import process_csv
+from services.dataProcess import process_csv, getSunburstData
 from models import transactions
 from models import categories
 from models import insights
@@ -156,4 +156,20 @@ def get_total_in_out(user_id):
         return jsonify({"error": "date must be YYYY-MM-DD"}), 400
     
     result, status = insights.getMonthlyBalance(user_id, date)
+    return jsonify(result), status
+
+
+@api_bp.route("/plots/sunburst", methods=["GET"])
+@login_required
+def get_sunburst_data(user_id):
+    # Example: GET /plots/sunburst?date=2025-10-01
+    date_par = request.args.get("date")
+    try:
+        date = datetime.strptime(date_par, "%Y-%m-%d").date()
+    except ValueError:
+        return jsonify({"error": "date must be YYYY-MM-DD"}), 400
+    
+    totals, _ = insights.getTotalByCategory(user_id, date)
+    result, status= getSunburstData(totals)
+
     return jsonify(result), status

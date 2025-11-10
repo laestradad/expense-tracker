@@ -12,7 +12,7 @@ export default function DashMonth() {
     try {
       const result = await apiFetch("/api/monthslist");
       setMonths(result || []);
-      setSelectedMonth(result[0].date || "")
+      setSelectedMonth(result[0]?.date || "")
     } catch (error) {
       console.error("Error fetching months:", error);
     }
@@ -72,9 +72,7 @@ export default function DashMonth() {
           </select>
         </div>) : (<p>No data available</p>)}
       
-      {plotData ? (
-        <div className="dashboard-item plot"><PlotRadial /></div>
-      ) : (<p>No data available</p>)}
+      <div className="dashboard-item plot"><PlotRadial selectedMonth={selectedMonth}/></div>
 
       {totals && totals.length > 0 ? (
         <div className="table-wrapper totals">
