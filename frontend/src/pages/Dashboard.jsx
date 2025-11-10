@@ -13,6 +13,15 @@ export default function Dashboard() {
   const [categories, setCategories] = useState([]); 
   const [transactions, setTransactions] = useState([]);
 
+  const fetchData = async () => {
+          try {
+            const result = await apiFetch("/api/transactions");
+            setTransactions(result || []);
+          } catch (error) {
+            console.error("Error fetching transactions:", error);
+          }
+        };
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -27,14 +36,7 @@ export default function Dashboard() {
         console.error("Error fetching transactions:", error);
       }
     };
-    const fetchData = async () => {
-        try {
-          const result = await apiFetch("/api/transactions");
-          setTransactions(result || []);
-        } catch (error) {
-          console.error("Error fetching transactions:", error);
-        }
-      };
+    
     fetchCategories();
     fetchData();
   }, []);
@@ -42,24 +44,61 @@ export default function Dashboard() {
   // Modal Management
   const [modalOpen, setModalOpen] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
+  const [trans_id, setTransId] = useState(null);
   
-  const handleOpen = (idx = null) => {  // idx is optional now
+  const handleOpen = (idx = null, id = null) => {
     setEditIndex(idx);
+    setTransId(id);
     setModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setModalOpen(false);
     setEditIndex(null);
+    setTransId(null);
   };
 
- const handleSubmitModal = (formData) => {
-    console.log("Form data to backend:", formData);
-    handleCloseModal();
-  };
+ const handleSubmitModal = async (formData) => {
+    if (editIndex === null) {
+      // Create Transaction
+      try {
+          const data = await apiFetch("/api/transactions", {
+            method: "POST",
+            body: JSON.stringify(formData),
+          });
+          console.log(data);
+      } catch (err) {
+        alert(err.message); // debug
+      }
+      fetchData();
+      handleCloseModal();
+    } else {
+      // Update Transaction
+      try {
+        const data = await apiFetch(`/api/transactions/${trans_id}`, {
+          method: "PUT",
+          body: JSON.stringify(formData),
+        });
+        console.log(data);
+      } catch (err) {
+        alert(err.message); // debug
+      }
+      fetchData();
+      handleCloseModal();
+    }
+  }
   
-  const handleDeleteModal = (formData) => {
-    console.log("Data to delete:", formData);
+  const handleDeleteModal = async () => {
+    // Delete Transaction
+    try {
+      const data = await apiFetch(`/api/transactions/${trans_id}`, {
+        method: "DELETE",
+      });
+      console.log(data);
+    } catch (err) {
+      alert(err.message); // debug
+    }
+    fetchData();
     handleCloseModal();
   };
 

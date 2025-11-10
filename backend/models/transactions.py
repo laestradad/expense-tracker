@@ -15,6 +15,7 @@ def getTransactions(user_id):
     c.type AS category_type
     FROM transactions t JOIN categories c ON t.category_id = c.id
     WHERE t.user_id = %s
+    ORDER BY id ASC;
     """
     parameters = (user_id,)
     rows = db.select_query(sql, parameters, as_dict=True)

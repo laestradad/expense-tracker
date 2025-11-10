@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import { FaArrowAltCircleUp , FaArrowAltCircleDown  } from "react-icons/fa";
 import { BsFillPencilFill } from "react-icons/bs";
 import { MdOutlineAddBox } from "react-icons/md";
-import { apiFetch } from "@/api/api";
 import "./Dashboard.css";
 
 export default function DashTable({ data, openModal }) {
@@ -40,7 +38,7 @@ export default function DashTable({ data, openModal }) {
                   <td>
                     <span className="actions">
                       <BsFillPencilFill
-                        onClick={() => openModal(idx)}
+                        onClick={() => openModal(idx, row.id)}
                       />
                     </span>
                   </td>

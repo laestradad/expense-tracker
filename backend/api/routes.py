@@ -55,7 +55,7 @@ def create_transaction(user_id):
     data = request.json
     
     category_id = data["category_id"]
-    amount = data["amount"]
+    amount = float(data["amount"])
     tran_date_str = data["transaction_date"]
     comment = data.get("comment")
 
@@ -80,7 +80,7 @@ def update_transaction(user_id, transaction_id):
     data = request.json
 
     category_id = data["category_id"]
-    amount = data["amount"]
+    amount = float(data["amount"])
     tran_date_str = data["transaction_date"]
     comment = data.get("comment")
 
