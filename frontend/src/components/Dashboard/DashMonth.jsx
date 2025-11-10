@@ -6,52 +6,77 @@ import { apiFetch } from "@/api/api";
 export default function DashMonth() {                  
   // Months options
   const [months, setMonths] = useState([]);
+  const [selectedMonth, setSelectedMonth] = useState(null);
+
+  const fetchMonths = async () => {
+    try {
+      const result = await apiFetch("/api/monthslist");
+      setMonths(result || []);
+      setSelectedMonth(result[0].date || "")
+    } catch (error) {
+      console.error("Error fetching months:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await apiFetch("/api/monthslist");
-        setMonths(result || []);
-      } catch (error) {
-        console.error("Error fetching transactions:", error);
-      }
-    };
-    fetchData();
+    fetchMonths();
   }, []);
 
-  // Selected months
-  const [selectedMonth, setSelectedMonth] = useState(months[0] || "");
+  // Fetch monthly totals
+  const [totals, setTotals] = useState(null);
+  
+  const fetchTotals = async (selectedMonth) => {
+    try {
+      const result = await apiFetch(`/api/insights/categories?date=${selectedMonth}`);
+      setTotals(result || []);
+    } catch (error) {
+      console.error("Error fetching totals:", error);
+    }
+  };
 
   const handleChange = (e) => {
     setSelectedMonth(e.target.value);
   };
   
-  // Fetch monthly totals
-  const [data, setData] = useState([]);
+  // Fetch monthly balances
+  const [balances, setBalances] = useState(null);
 
-  const isPositive = true;
+  const fetchBalance = async (selectedMonth) => {
+    try {
+      const result = await apiFetch(`/api/insights/inout?date=${selectedMonth}`);
+      setBalances(result || []);
+    } catch (error) {
+      console.error("Error fetching inout:", error);
+    }
+  };
+  
+  // Fetch plot data
+  const [plotData, setplotData] = useState(null);
+  
+  useEffect(() => {
+    if (selectedMonth) {
+      fetchTotals(selectedMonth);
+      fetchBalance(selectedMonth);
+    }
+  }, [selectedMonth]);
 
   return (
     <main style={{marginBottom : '60px'}}>
-      {/* Month Selector */}
-      <div className="controls">
-        <label>Select Month: </label>
-        <select value={selectedMonth} onChange={handleChange}>
-          <option value="">Select a month</option>
-          {months.map((month) => (
-            <option key={month.date} value={month.date}>
-              {month.value}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {data && data.length > 0 ? (
-      <>
-        {/* Plot Placeholder */}
+      {months && months.length > 0 ? (
+        <div className="controls">
+          <label>Select Month: </label>
+          <select value={selectedMonth.date} onChange={handleChange}>
+            {months.map(
+              (month) => (<option key={month.date} value={month.date} label={month.value}/>)
+            )}
+          </select>
+        </div>) : (<p>No data available</p>)}
+      
+      {plotData ? (
         <div className="dashboard-item plot"><PlotRadial /></div>
+      ) : (<p>No data available</p>)}
 
-        {/* Totals Table */}
+      {totals && totals.length > 0 ? (
         <div className="table-wrapper totals">
           <table className="data-table">
             <thead>
@@ -61,40 +86,37 @@ export default function DashMonth() {
               </tr>
             </thead>
             <tbody>
-              {rows.map((row) => {
-              
-                return (
-                  <tr>
-                    <td>
-                      {row.category_type === "income" ? <FaArrowAltCircleUp color="#17b117"/> : <FaArrowAltCircleDown color="#ce4646ff"/>}
-                      {" "}{row.category_name}
-                    </td>
-                    <td>${" "}{row.amount}</td>
-                  </tr>
-                );
-              })}
+              {totals.map((row, idx) => (
+                <tr key={row.category_name || idx}>
+                  <td>
+                    {row.category_type === "income" ? (
+                      <FaArrowAltCircleUp color="#17b117" />
+                    ) : (
+                      <FaArrowAltCircleDown color="#ce4646ff" />
+                    )}{" "}{row.category_name}
+                  </td>
+                  <td>${" "}{row.total_amount}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
-        </div>
-
+        </div>) : (<p>No data available</p>)}
         
-        {/* Summary Boxes */}
+      {balances? (
         <div className="insights-container">
           <div className="insight-card pos">
             <h3>Total In</h3>
-            <p>200.000</p>
+            <p>+${balances.income}</p>
           </div>
           <div className="insight-card neg">
             <h3>Total Out</h3>
-            <p>300.000</p>
+            <p>-${balances.outcome}</p>
           </div>
-          <div className={`insight-card two-col ${isPositive ? "pos" : "neg"}`}>
+          <div className={`insight-card two-col ${balances.isPositive ? "pos" : "neg"}`}>
             <h3>Balance</h3>
-            <p>-100.000</p>
+            <p>${balances.balance}</p>
           </div>
-        </div>
-      </>) : (<p>No data available</p>)}
-
+        </div>) : (<p>No data available</p>)}
     </main>
   );
 }

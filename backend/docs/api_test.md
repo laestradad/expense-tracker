@@ -57,7 +57,7 @@ curl.exe -X GET http://127.0.0.1:5000/api/transactions -H "Authorization: Bearer
 ```
 
 ## Get insights from transactions for user logged in
-TOTAL IN, TOTAL OUT
+TOTAL IN, TOTAL OUT, TOTAL BALANCE
 ```bash
 curl.exe -X GET http://127.0.0.1:5000/api/insights/inout?date=2025-01-01 -H "Authorization: Bearer %TOKEN%" -H "Content-Type: application/json" 
 ```
@@ -65,9 +65,4 @@ curl.exe -X GET http://127.0.0.1:5000/api/insights/inout?date=2025-01-01 -H "Aut
 GET TOTALS BY CATEGORY
 ```bash
 curl.exe -X GET http://127.0.0.1:5000/api/insights/categories?date=2025-01-01 -H "Authorization: Bearer %TOKEN%" -H "Content-Type: application/json" 
-```
-
-GET MONTHLY BALANCE
-```bash
-curl.exe -X GET http://127.0.0.1:5000/api/insights/balance?date=2025-01-01 -H "Authorization: Bearer %TOKEN%" -H "Content-Type: application/json" 
 ```

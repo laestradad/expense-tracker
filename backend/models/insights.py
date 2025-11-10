@@ -1,24 +1,6 @@
 from services import db
 
 
-def getMonthlyBalance(user_id,date):
-    sql = """
-    SELECT 
-    SUM(CASE 
-        WHEN c.type = 'income' THEN t.amount
-        WHEN c.type = 'expense' THEN -t.amount
-        ELSE 0
-        END
-    ) AS balance
-    FROM transactions t JOIN categories c ON t.category_id = c.id
-    WHERE t.user_id = %s
-        AND DATE_TRUNC('month', t.transaction_date) = DATE_TRUNC('month', %s);
-    """
-    parameters = (user_id,date)
-    row = db.select_query(sql, parameters, fetch=1, as_dict=True)
-    return row, 201
-    
-
 def getTotalByCategory(user_id,date):
     sql = """
     SELECT 
@@ -37,7 +19,7 @@ def getTotalByCategory(user_id,date):
     return rows, 201
 
 
-def getTotalInOut(user_id,date):
+def getMonthlyBalance(user_id,date):
     sql = """
     SELECT 
         c.type AS category_type,
@@ -49,7 +31,27 @@ def getTotalInOut(user_id,date):
     """
     parameters = (user_id,date)
     rows = db.select_query(sql, parameters, as_dict=True)
-    return rows, 201
+    
+    income = 0
+    outcome = 0
+    isPositive = False
+
+    for row in rows:
+        if row["category_type"] == "income":
+            income = row["total_amount"]
+        elif row["category_type"] == "expense":
+            outcome = row["total_amount"]
+
+    balance = income - outcome
+    isPositive = balance > 0
+    
+    result = {
+        "income": income,
+        "outcome": outcome,
+        "balance": balance,
+        "isPositive": isPositive
+    }
+    return result, 201
 
 
 def getUserMonths(user_id):

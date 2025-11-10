@@ -120,20 +120,6 @@ def get_user_months(user_id):
     return jsonify(result), status
 
 
-@api_bp.route("/insights/balance", methods=["GET"])
-@login_required
-def get_monthly_balance(user_id):
-    # Example: GET /insights/balance?date=2025-10-01
-    date_par = request.args.get("date")
-    try:
-        date = datetime.strptime(date_par, "%Y-%m-%d").date()
-    except ValueError:
-        return jsonify({"error": "date must be YYYY-MM-DD"}), 400
-    
-    result, status = insights.getMonthlyBalance(user_id, date)
-    return jsonify(result), status
-
-
 @api_bp.route("/insights/categories", methods=["GET"])
 @login_required
 def get_total_by_category(user_id):
@@ -153,10 +139,14 @@ def get_total_by_category(user_id):
 def get_total_in_out(user_id):
     # Example: GET /insights/inout?date=2025-10-01
     date_par = request.args.get("date")
+    
+    if not date_par:
+        return jsonify({"error": "Missing date parameter"}), 400
+    
     try:
         date = datetime.strptime(date_par, "%Y-%m-%d").date()
     except ValueError:
         return jsonify({"error": "date must be YYYY-MM-DD"}), 400
     
-    result, status = insights.getTotalInOut(user_id, date)
+    result, status = insights.getMonthlyBalance(user_id, date)
     return jsonify(result), status
