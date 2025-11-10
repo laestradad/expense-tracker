@@ -16,25 +16,32 @@ def hello():
 
 
 @api_bp.route('/upload', methods = ['POST'])
-def upload():
-    title = request.form.get("title", "")
+@login_required
+def upload(user_id):
     file = request.files.get("file")
-    print(title, file)
+
     if not file:
         return jsonify({"error": "No file uploaded"}), 400
-    
-    # Read CSV into pandas dataframe
-    try:
-        table_json = process_csv(file)
-    except Exception as e:
-        return jsonify({"error": f"Failed to read CSV: {str(e)}"}), 400
 
-    return jsonify({"title": title, "table": table_json, "message": "file received!"})
+    if not file.filename.endswith(".csv"):
+        return jsonify({"error": "Invalid file type, must be CSV"}), 400
+    
+    result, status = process_csv(file, user_id)
+
+    return jsonify(result), status
 
 
 @api_bp.route("/download")
+def download():
+    return send_from_directory(
+            directory=current_app.static_folder,
+            path="sample.csv",
+            as_attachment=True)
+
+
+@api_bp.route("/downloadraw")
 @login_required
-def download(user_id):
+def download_raw(user_id):
     return send_from_directory(
             directory=current_app.static_folder,
             path="sample.csv",

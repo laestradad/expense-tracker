@@ -79,4 +79,12 @@ def updateTransaction(transaction_id, category_id, amount, comment, transaction_
         return {"error": "database error"}, 500
 
 
-
+def insert_transactions_bulk(transactions):
+    sql = """
+        INSERT INTO transactions (user_id, category_id, amount, comment, transaction_date)
+        VALUES (%s, %s, %s, %s, %s)
+    """
+    with db.pool.connection() as conn:
+        with conn.cursor() as cur:
+            cur.executemany(sql, transactions)
+            conn.commit()

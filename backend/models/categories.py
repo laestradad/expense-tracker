@@ -23,3 +23,12 @@ def getCategories(user_id):
     except Exception as e:
         print(f"Database error: {e}")
         return {"error": "database error"}, 500
+    
+    
+def get_category_map(user_id):
+    """Load {name: id} map of valid categories from DB."""
+    sql = "SELECT id, name FROM categories WHERE user_id IS NULL OR user_id = %s"
+    with db.pool.connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(sql, (user_id,))
+            return {row[1]: row[0] for row in cur.fetchall()}

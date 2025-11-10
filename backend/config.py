@@ -14,7 +14,9 @@ class BaseConfig:
     # JWT
     JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "dev-jwt-secret")
     JWT_EXPIRATION = int(os.getenv("JWT_EXPIRATION", 3600))
-    
+
+    # MAX FILE DIMENSION    
+    MAX_CONTENT_LENGTH= 2 * 1024 * 1024  # 2 MB max
     TESTING = False
 
 class Dev(BaseConfig):
