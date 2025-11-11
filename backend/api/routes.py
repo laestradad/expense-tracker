@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, send_from_directory, current_app
 from datetime import datetime
 from services.decorators import login_required
-from services.dataProcess import process_csv, getSunburstData
+import services.dataProcess as dp
 from models import transactions
 from models import categories
 from models import insights
@@ -26,7 +26,7 @@ def upload(user_id):
     if not file.filename.endswith(".csv"):
         return jsonify({"error": "Invalid file type, must be CSV"}), 400
     
-    result, status = process_csv(file, user_id)
+    result, status = dp.process_csv(file, user_id)
 
     return jsonify(result), status
 
@@ -170,6 +170,22 @@ def get_sunburst_data(user_id):
         return jsonify({"error": "date must be YYYY-MM-DD"}), 400
     
     totals, _ = insights.getTotalByCategory(user_id, date)
-    result, status= getSunburstData(totals)
+    result, status= dp.getSunburstData(totals)
 
     return jsonify(result), status
+
+
+@api_bp.route("/plots/trend", methods=["GET"])
+@login_required
+def get_trend_data(user_id):
+    try:
+        rows = transactions.getTransactionsForDP(user_id)
+        df = dp.getTransactionsDF(rows)
+        cats = categories.get_full_category_map(user_id)
+        result = dp.getTrendData(df, cats)
+
+        return jsonify(result), 200
+
+    except Exception as e:
+        print(f"[ERROR] Trend plot generation failed: {e}")
+        return jsonify({"error": "internal server error"}), 500

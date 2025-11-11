@@ -32,3 +32,13 @@ def get_category_map(user_id):
         with conn.cursor() as cur:
             cur.execute(sql, (user_id,))
             return {row[1]: row[0] for row in cur.fetchall()}
+
+
+def get_full_category_map(user_id):
+    """Load {name: id} map of valid categories from DB."""
+    sql = "SELECT id, name, type FROM categories WHERE user_id IS NULL OR user_id = %s"
+    with db.pool.connection() as conn:
+        with conn.cursor(row_factory=psycopg.rows.dict_row) as cur:
+            cur.execute(sql, (user_id,))
+            rows = cur.fetchall()
+            return rows

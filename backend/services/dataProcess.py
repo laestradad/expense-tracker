@@ -1,7 +1,9 @@
+import pandas as pd
 import csv
 import io
 from datetime import datetime
-from models.categories import get_category_map
+from collections import defaultdict
+from models.categories import get_category_map, get_full_category_map
 from models.transactions import insert_transactions_bulk
 
 
@@ -121,3 +123,104 @@ def getSunburstData(totals):
             values.append(float(r["total_amount"]))
 
     return ({ "labels": labels, "parents": parents, "values": values }), 201
+
+def getTransactionsDF(rows):
+    try:
+        if not rows:
+            return pd.DataFrame(columns=["date", "category", "amount", "comment"])
+
+        df = pd.DataFrame(rows)
+        df["date"] = pd.to_datetime(df["date"])
+        df["amount"] = df["amount"].astype(float)
+        return df
+
+    except Exception as e:
+        print(f"Error creating DataFrame: {e}")
+        return pd.DataFrame(columns=["date", "category", "amount", "comment"])
+
+def getTrendData(df, categories):
+    # Create month column
+    df["date"] = pd.to_datetime(df["date"])
+    df["month"] = df["date"].dt.to_period("M").astype(str)
+
+    # Create new dataframe which is groupby month and category
+    grouped = df.groupby(["month", "category"])["amount"].sum().to_frame().reset_index()
+    
+    # Create Transactions column
+    grouped['Transactions'] = ""
+    for index, row in grouped.iterrows():
+        # Create dataframe x that has ["date","amount","comment"] for the current ["month", "category"] in grouped
+        x = df[(df["month"] == row["month"]) & (df["category"] == row["category"])][["date","amount","comment"]]
+        x["date"] = x["date"].dt.strftime('%d/%m')
+        
+        # Title of catergory
+        label = "<b>" + row["category"] + "</b><br>"
+        # Iterate dataframe x, and create 1 label
+        for _, r in x.iterrows():
+            comment = r["comment"] if pd.notna(r["comment"]) else ""
+            label += f"{r['date']} ${round(r['amount'],0)} {comment}<br>"
+        
+        # Save label
+        grouped.at[index, 'Transactions'] = label
+
+    # Prepare data 
+    bar_data = []
+    for cat in categories:
+        cat_name = cat["name"]
+        cat_type = cat["type"]
+
+        # Filter grouped DataFrame by category name
+        x = grouped[grouped["category"] == cat_name]
+        if x.empty:
+            continue
+
+        # Make negative values for expenses
+        values = x["amount"].tolist()
+        if cat_type.lower() == "expense":
+            values = [-v for v in values]
+
+        bar_data.append({
+            "type": cat_type,
+            "category": cat_name,
+            "months": x["month"].tolist(),
+            "values": values,
+            "text": x["Transactions"].tolist(),
+        })
+
+    # Create cashflow trend based on pivot
+    df_cf = df.copy()
+
+    # Negate amounts for expense categories
+    df_cf.loc[df_cf['category'].isin(
+        [cat["name"] for cat in categories if cat["type"].lower() == "expense"]
+    ), 'amount'] *= -1
+
+    pivot= pd.pivot_table(data=df_cf, 
+                            index="month", 
+                            values="amount",
+                            fill_value=0,
+                            aggfunc= "sum")
+    
+    # Calculate cumulative cashflow
+    pivot['Cashflow_Cumulative'] = 0.0
+    prev = None
+    for i in pivot.index:
+        if prev is None: # First row
+            pivot.at[i, "Cashflow_Cumulative"] = pivot.loc[i, "amount"]
+        else:
+            pivot.at[i, "Cashflow_Cumulative"] = pivot.loc[prev, "Cashflow_Cumulative"] + pivot.loc[i, "amount"]
+        prev = i
+        
+    pos_months = pivot[pivot["amount"] > 0]
+    neg_months = pivot[pivot["amount"] < 0]
+
+    return {
+        "months": pivot.index.tolist(),
+        "balance": pivot["amount"].tolist(),
+        "cumulative": pivot["Cashflow_Cumulative"].tolist(),
+        "pos_months": pos_months.index.tolist(),
+        "pos_amounts": pos_months["amount"].tolist(),
+        "neg_months": neg_months.index.tolist(),
+        "neg_amounts": neg_months["amount"].tolist(),
+        "bardata": bar_data
+    }

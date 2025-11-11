@@ -88,3 +88,20 @@ def insert_transactions_bulk(transactions):
         with conn.cursor() as cur:
             cur.executemany(sql, transactions)
             conn.commit()
+
+
+def getTransactionsForDP(user_id):
+    sql = """
+    SELECT 
+        t.transaction_date AS date,
+        c.name AS category,
+        t.amount,
+        t.comment
+    FROM transactions t
+    JOIN categories c ON t.category_id = c.id
+    WHERE t.user_id = %s
+    ORDER BY t.transaction_date ASC;
+    """
+    parameters = (user_id,)
+    rows = db.select_query(sql, parameters, as_dict=True)
+    return rows
