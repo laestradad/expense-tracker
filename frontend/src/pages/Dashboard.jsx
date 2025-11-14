@@ -67,6 +67,7 @@ export default function Dashboard() {
             body: JSON.stringify(formData),
           });
           console.log(data);
+          alert("Transaction created!")
       } catch (err) {
         alert(err.message); // debug
       }
@@ -79,7 +80,7 @@ export default function Dashboard() {
           method: "PUT",
           body: JSON.stringify(formData),
         });
-        console.log(data);
+        alert("Transaction updated!")
       } catch (err) {
         alert(err.message); // debug
       }
@@ -90,16 +91,18 @@ export default function Dashboard() {
   
   const handleDeleteModal = async () => {
     // Delete Transaction
-    try {
-      const data = await apiFetch(`/api/transactions/${trans_id}`, {
-        method: "DELETE",
-      });
-      console.log(data);
-    } catch (err) {
-      alert(err.message); // debug
+    if (confirm("Are you sure  do you want to delete this entry?") == true) {
+      try {
+        const data = await apiFetch(`/api/transactions/${trans_id}`, {
+          method: "DELETE",
+        });
+        console.log(data);
+      } catch (err) {
+        alert(err.message); // debug
+      }
+      fetchData();
+      handleCloseModal();
     }
-    fetchData();
-    handleCloseModal();
   };
 
   return (
