@@ -16,8 +16,8 @@ export default function UploadFile() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setMessage("Sending...")
-    
+    setMessage("Sending...");
+
     if (!file) return alert("Please select a CSV");
 
     const formData = new FormData();
@@ -28,18 +28,27 @@ export default function UploadFile() {
         method: "POST",
         body: formData,
       });
-      // show data retrieved
-      alert(JSON.stringify(data))
-      setMessage("Success")
 
-      // Pass the data back up to Dashboard
-      onDataLoaded(data);
+      // SUCCESS
+      alert(data.message);
+      setMessage("Success");
 
     } catch (err) {
-      alert(err.message); // debug
-      setStatus("Login failed");
+
+      // Backend validation errors (CSV errors)
+      if (err.data?.errors) {
+        const formatted = err.data.errors
+          .map((e) => `Line ${e.line}: ${e.error}`)
+          .join("\n");
+
+        alert(formatted);
+      } else {
+        alert(err.message);
+      }
+
+      setMessage("Error during upload");
     }
-  }
+  };
 
   return(
     <div style={{ marginBottom: '2rem' }}>
