@@ -1,8 +1,8 @@
+from flask import Response
 import pandas as pd
 import csv
 import io
 from datetime import datetime
-from collections import defaultdict
 from models.categories import get_category_map, get_full_category_map
 from models.transactions import insert_transactions_bulk
 
@@ -224,3 +224,30 @@ def getTrendData(df, categories):
         "neg_amounts": neg_months["amount"].tolist(),
         "bardata": bar_data
     }
+
+
+def generate_csv_response(data):
+
+    if not data:
+        return Response("No data found", status=404)
+    
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"data_{timestamp}.csv"
+
+    # Extract headers from the first dict
+    headers = data[0].keys()
+    
+    # Create CSV
+    output = io.StringIO()
+    writer = csv.DictWriter(output, fieldnames=headers)
+    writer.writeheader()
+    writer.writerows(data)
+    output.seek(0)
+
+    # Compose response
+    response = Response(output.getvalue(), mimetype='text/csv')
+    response.headers['Content-Disposition'] = (
+        f"attachment; filename=\"{filename}\";"
+    )
+
+    return response

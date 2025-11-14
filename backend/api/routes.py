@@ -42,11 +42,8 @@ def download():
 @api_bp.route("/downloadraw")
 @login_required
 def download_raw(user_id):
-    return send_from_directory(
-            directory=current_app.static_folder,
-            path="sample.csv",
-            as_attachment=True
-        )
+    data = transactions.getTransactions(user_id)
+    return dp.generate_csv_response(data)
 
 
 @api_bp.route("/transactions", methods=["GET"])

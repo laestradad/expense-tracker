@@ -45,9 +45,22 @@ export async function downloadFile(url) {
   if (!res.ok) throw new Error("Download failed");
 
   const blob = await res.blob();
+
+  let filename = "download.csv"; // fallback
+  const disposition = res.headers.get("Content-Disposition");
+  if (disposition && disposition.includes("filename=")) {
+    filename = disposition
+      .split("filename=")[1]
+      .split(";")[0]
+      .replace(/"/g, "")
+      .trim();
+  }
+
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = "sample.csv";
+  link.download = filename;
+  document.body.appendChild(link);
   link.click();
+  link.remove();
   URL.revokeObjectURL(link.href);
 }

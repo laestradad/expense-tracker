@@ -28,7 +28,7 @@ export default function DeleteAccount() {
 
   const handleDownload = async () => {
     try {
-      await downloadFile("/api/download");
+      await downloadFile("/api/downloadraw");
     } catch (err) {
       alert(err.message);
     }
