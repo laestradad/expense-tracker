@@ -45,6 +45,7 @@ export default function Register() {
   return (
     <div>
       <h1>Register Page</h1>
+      <p>Registered already? <a onClick={() => navigate("/login")}>Log in here.</a></p>
       <form onSubmit={handleSubmit}>
         <input
           autoComplete="off"

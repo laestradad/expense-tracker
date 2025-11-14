@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { apiFetch } from "@/api/api";
 
 export default function Login({ onLogin }) {
+  const navigate = useNavigate();
 
   const [status, setStatus] = useState("")
 
@@ -39,6 +41,7 @@ export default function Login({ onLogin }) {
   return (
     <div>
       <h1>Login Page</h1>
+      <p>First time? <a onClick={() => navigate("/register")}>Sign up here.</a></p>
       <form onSubmit={handleSubmit}>
         <input
           autoComplete="off"
