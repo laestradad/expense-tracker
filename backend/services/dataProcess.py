@@ -46,7 +46,6 @@ def process_csv(file, user_id):
 
         for i, row in enumerate(reader, start=2):  # line 2 = first data row\\
             
-            print(f"{i=},{row=}")#DEBUGXXX
             try:
                 # Validate each field, save in transactions if no errors
                 transaction_date = _validate_date(row["date"], line=i)
