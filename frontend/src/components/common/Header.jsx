@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import Logo from "@/assets/react.svg";
 
 export default function Header() {
-  const { loggedIn, logout } = useAuth();
+  const { loggedIn } = useAuth();
   
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -12,7 +13,10 @@ export default function Header() {
   return (
     <nav className="navbar">
       <div className="nav-container">
-        <Link to="/" className="nav-logo">MyApp</Link>
+        <Link to="/" className="nav-logo">
+          <img src={Logo} alt="Logo" />
+          Expense Tracker
+        </Link>
         <button className="menu-toggle" onClick={toggleMenu}>
           ☰
         </button>

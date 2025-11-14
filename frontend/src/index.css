@@ -25,6 +25,9 @@ body {
 }
 
 footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;  
   position: fixed;
   bottom: 0;
   left: 0;
@@ -32,8 +35,8 @@ footer {
   background-color: #1a1a1a;
   color: #ddd;
   text-align: center;
-  padding: 1rem;
   z-index: 1000;
+  padding: 0 1em;
 }
 
 a {
@@ -100,6 +103,10 @@ select:hover,
 select:focus {
   border-color: #646cff;
   outline: none;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  caret-color: transparent;
 }
 
 @media (prefers-color-scheme: light) {

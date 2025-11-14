@@ -17,10 +17,18 @@
 }
 
 .nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 1.75rem;
   font-weight: bold;
   color: #fff;
   text-decoration: inherit;
+}
+
+.nav-logo img {
+  height: 1em;
+  width: 1em;
 }
 
 .menu-toggle {
@@ -79,4 +87,75 @@
   max-width: 300px;
   margin: 0 auto;
   border-top: 1px solid #ccc;
+}
+
+/* HOME */
+.home-container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.logos {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  transition: filter 300ms;
+  will-change: filter;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #4e55e2c4);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #15a7cfaa);
+}
+
+.logo.flask:hover {
+  filter: drop-shadow(0 0 2em #c5c5c5bd);
+}
+
+.logo.postgres:hover {
+  filter: drop-shadow(0 0 2em #336791aa);
+}
+
+@media (max-width: 600px) {
+  .logo {
+    height: 4em; 
+    width: 4em;
+    padding: 0.5em;
+  }
+}
+
+.card {
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: #413f3f;
+  max-width: 600px;
+  text-align: left;
+}
+
+/* FOOTER */
+.social-links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 2rem;
+}
+
+.social-logo {
+  width: 1.5em;
+  transition: filter 0.3s;
+}
+
+.social-logo:hover {
+  filter: drop-shadow(0 0 0.5em #646cffaa);
 }

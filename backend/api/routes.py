@@ -5,14 +5,34 @@ import services.dataProcess as dp
 from models import transactions
 from models import categories
 from models import insights
+from services import db
+from version import __version__
+
 
 
 api_bp = Blueprint("api", __name__)
 
 
-@api_bp.route("/hello", methods=["GET"])
-def hello():
-    return jsonify(message="Hello from Flask!")
+@api_bp.route("/health", methods=["GET"])
+def health():
+    try:
+        rows = db.select_query("SELECT version()")
+        db_status = "Alive!"
+        db_version = rows[0][0]
+    except Exception:
+        db_status = "down :("
+        db_version = None
+
+    return jsonify({
+        "message": "Hello from Flask!",
+        "db_status": db_status,
+        "db_version": db_version
+    })
+
+
+@api_bp.route("/version", methods=["GET"])
+def version():
+    return jsonify({"version": __version__})
 
 
 @api_bp.route('/upload', methods = ['POST'])

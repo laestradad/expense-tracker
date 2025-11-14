@@ -42,6 +42,7 @@ export default function Login({ onLogin }) {
     <div>
       <h1>Login Page</h1>
       <p>First time? <a onClick={() => navigate("/register")}>Sign up here.</a></p>
+      <p> Or use the test account:<br/> <strong>usr:</strong> demo / <strong>psw:</strong> demo123 </p>
       <form onSubmit={handleSubmit}>
         <input
           autoComplete="off"
