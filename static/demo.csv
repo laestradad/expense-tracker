@@ -1,0 +1,400 @@
+date,category,amount,comment
+2018-01-11,Salary,1010.48,
+2018-01-15,Food,30,
+2018-01-15,Housing,327.5,
+2018-01-15,Leisure,4,protect garmin
+2018-01-15,Leisure,8,madrid
+2018-01-15,Utilities,11,luce
+2018-01-21,Food,50,
+2018-01-21,Food,10,Pirelli
+2018-01-21,Leisure,215,Amazon Ukulele
+2018-01-21,Leisure,9,Curso Ukulele
+2018-01-21,Leisure,40,Bose
+2018-01-21,Leisure,20,
+2018-01-21,Transport,10,sergio
+2018-01-29,Food,15,
+2018-01-29,Food,12,
+2018-01-29,Leisure,15,reloj
+2018-02-01,Food,10,Cammafa
+2018-02-01,Food,5,Pirelli
+2018-02-01,Food,15,
+2018-02-01,Housing,327.5,
+2018-02-01,Leisure,7,lapicero moleskine
+2018-02-01,Leisure,9,Curso Teoria Musical
+2018-02-01,Leisure,9,
+2018-02-01,Leisure,7,
+2018-02-01,Transport,10,sergio
+2018-02-01,Utilities,30,Vodafone
+2018-02-01,Utilities,119,riscaldamento
+2018-02-01,Utilities,20,wifi
+2018-02-01,Utilities,10,
+2018-02-13,Food,16,
+2018-02-13,Food,18,
+2018-02-13,Food,6,
+2018-02-13,Food,15,
+2018-02-13,Food,6,
+2018-02-13,Health,150,
+2018-02-13,Leisure,5,
+2018-02-13,Leisure,20,
+2018-02-13,Leisure,40,Genova - hotel
+2018-02-13,Leisure,10,
+2018-02-13,Salary,850,
+2018-02-13,Transport,6.5,ATM
+2018-02-17,Food,5,pirelli
+2018-02-17,Food,23.5,mercado
+2018-02-17,Transport,5,sergio
+2018-02-17,Utilities,6,vodafone
+2018-02-19,Leisure,25,genova - trenes 
+2018-02-19,Leisure,83,genova - gastos
+2018-02-23,Food,47.5,
+2018-02-23,Food,5,gelato
+2018-02-23,Food,7,antojos
+2018-02-23,Food,10,pirelli
+2018-02-23,Utilities,46,
+2018-02-23,Utilities,10,
+2018-02-23,Utilities,20,wifi
+2018-02-28,Food,12,camilo
+2018-02-28,Food,2,
+2018-02-28,Transport,15,sergio
+2018-03-11,Food,15,ajustes y comunes
+2018-03-11,Food,8,
+2018-03-11,Food,23,
+2018-03-11,Housing,327.5,
+2018-03-11,Salary,834.57,
+2018-03-11,Transport,6.5,ATM
+2018-03-26,Food,11,pirelli
+2018-03-26,Food,13,poormanger
+2018-03-26,Food,8,pizza
+2018-03-26,Food,26,
+2018-03-26,Food,19,
+2018-03-26,Leisure,8,
+2018-03-26,Leisure,25,Trenes milan
+2018-03-26,Transport,15,luca
+2018-03-26,Transport,28,gtt luca
+2018-03-26,Transport,13,ATM
+2018-03-26,Utilities,10,vodafone
+2018-03-31,Food,15,pizza
+2018-03-31,Leisure,11,libro gab
+2018-03-31,Leisure,50,comida lecco
+2018-03-31,Leisure,160,
+2018-04-05,Food,35,
+2018-04-05,Food,10,santi giraldi
+2018-04-08,Food,9,
+2018-04-08,Housing,327.5,
+2018-04-08,Leisure,15,
+2018-04-08,Utilities,14,gas
+2018-04-10,Housing,613.43,
+2018-04-10,Salary,850,
+2018-04-17,Food,40,
+2018-04-17,Food,30,Sergio milan
+2018-04-17,Food,10,
+2018-04-17,Leisure,77,ikea
+2018-04-17,Leisure,25,pam
+2018-04-17,Transport,6.5,ATM
+2018-04-17,Transport,35,ATM
+2018-04-17,Utilities,24,TIM
+2018-04-17,Utilities,10,
+2018-04-17,Utilities,20,wifi
+2018-04-30,Food,145,
+2018-04-30,Food,15,
+2018-04-30,Leisure,35,proteccion celular
+2018-04-30,Leisure,20,
+2018-04-30,Leisure,50,torino
+2018-04-30,Leisure,120,toscana
+2018-04-30,Leisure,90,venezia
+2018-04-30,Salary,761.22,
+2018-05-03,Food,30,
+2018-05-03,Leisure,25,chicuela
+2018-05-03,Transport,22,ATM
+2018-05-03,Utilities,5,
+2018-05-03,Utilities,33.3,Basuras Re Umberto
+2018-05-10,Food,16,
+2018-05-10,Housing,731.25,
+2018-05-10,Leisure,80,Maleta de mano 
+2018-05-10,Leisure,40,Headspace
+2018-05-10,Leisure,8,tiger
+2018-05-10,Transport,36,Multa
+2018-05-10,Transport,4,ATM
+2018-05-12,Utilities,15,wifi
+2018-05-13,Food,9,
+2018-05-13,Leisure,9,
+2018-05-13,Leisure,10,torino
+2018-05-13,Leisure,20,inter sassuolo
+2018-05-13,Utilities,21,
+2018-05-25,Food,37,viernes en la noche aseo
+2018-05-25,Food,12,alemania
+2018-05-25,Food,3,
+2018-05-25,Food,29.5,torino
+2018-05-25,Food,38,
+2018-05-25,Food,6,
+2018-05-25,Food,20,?
+2018-05-25,Leisure,25,alemania
+2018-05-25,Leisure,42,trenes torino
+2018-05-25,Leisure,65,colombia egipto
+2018-05-25,Utilities,44.5,gas torino
+2018-05-31,Salary,1586.49,Siemens Mayo
+2018-06-01,Housing,731.25,
+2018-06-01,Utilities,35.2,wifi
+2018-06-03,Food,67,
+2018-06-03,Food,25,arepas
+2018-06-03,Food,12,ferias rho
+2018-06-03,Food,5,
+2018-06-03,Leisure,5,
+2018-06-03,Leisure,25,colombia egipto
+2018-06-03,Leisure,10,chicuela
+2018-06-03,Transport,22,ATM
+2018-06-03,Transport,5,rho
+2018-06-12,Food,12,spontini
+2018-06-12,Food,5,javier
+2018-06-12,Food,14,gelato javier
+2018-06-12,Leisure,99,Patineta
+2018-06-12,Leisure,30,ventilador
+2018-06-12,Salary,169.51,Bonus Pirelli
+2018-06-12,Utilities,30,
+2018-06-22,Food,23,
+2018-06-22,Food,21,Mercado
+2018-06-22,Food,35,Aseo personal + ajustes
+2018-06-22,Leisure,254.3,"Amazon: aux, pantalla, basuras, boiler, archivador"
+2018-06-22,Leisure,67,Escritorio
+2018-06-22,Leisure,20,Trenes chicuela
+2018-06-22,Transport,5,sesto 1 maggio
+2018-06-30,Food,18,
+2018-06-30,Food,44,Mariajo
+2018-06-30,Food,4.5,
+2018-06-30,Leisure,704,Bici Nueva
+2018-06-30,Leisure,37,Mariajo
+2018-06-30,Leisure,10,Chiuela
+2018-06-30,Salary,1816.1,Siemens Junio
+2018-07-01,Food,56.3,
+2018-07-01,Transport,22,ATM
+2018-07-01,Utilities,35.2,wifi
+2018-07-13,Food,5,
+2018-07-13,Food,5,
+2018-07-13,Food,9,
+2018-07-13,Food,20,Poke
+2018-07-13,Housing,725.4,
+2018-07-13,Leisure,14,
+2018-07-13,Leisure,5,
+2018-07-13,Leisure,30,jarra
+2018-07-13,Leisure,5,Sele
+2018-07-13,Leisure,10,parque
+2018-07-13,Leisure,5,
+2018-07-13,Utilities,68.7,Luz + Voltura
+2018-07-22,Food,5,app
+2018-07-22,Food,8,gelato
+2018-07-22,Food,9,frutas
+2018-07-22,Food,12,varios
+2018-07-22,Food,14,arepas
+2018-07-22,Leisure,21,regalo chicu
+2018-07-22,Leisure,25,Trenes susi
+2018-07-27,Food,39,papas
+2018-07-27,Food,6,
+2018-07-27,Leisure,67,ps games
+2018-07-27,Utilities,33.42,Ajuste Caparra
+2018-07-30,Food,25,piadineria
+2018-07-30,Food,7,carne
+2018-07-30,Food,20,poke
+2018-07-31,Food,5,mixto
+2018-07-31,Leisure,225,celular z2
+2018-07-31,Leisure,19.93,accesorios cel
+2018-07-31,Leisure,13,jarra y varios
+2018-07-31,Salary,1583.67,Siemens Julio
+2018-08-01,Food,5,siemens
+2018-08-01,Food,5,gelato
+2018-08-01,Food,7,
+2018-08-01,Food,5,
+2018-08-01,Food,44,Aperitivo mariajo
+2018-08-01,Food,3,
+2018-08-01,Housing,725.4,
+2018-08-01,Leisure,64,almuerzo papas
+2018-08-01,Transport,22,ATM
+2018-08-01,Transport,1.5,ATM
+2018-08-01,Utilities,15,
+2018-08-17,Leisure,150,ps4 
+2018-08-17,Leisure,20,ps acc
+2018-08-17,Leisure,20,
+2018-08-17,Leisure,10,gelato
+2018-08-17,Leisure,44,gaby
+2018-08-20,Salary,1578,
+2018-08-22,Food,11,carbonara torino
+2018-08-22,Food,7,kebab
+2018-08-22,Food,4,
+2018-08-22,Food,5,siemens
+2018-08-22,Leisure,60,ps plus
+2018-08-22,Leisure,15,ps acc
+2018-08-23,Food,3,
+2018-08-23,Food,19,auchan
+2018-08-23,Leisure,14,ps games
+2018-08-27,Food,14,sushi
+2018-08-27,Food,5,pizza
+2018-08-27,Leisure,28,torino
+2018-08-27,Leisure,5,torta de atun torino
+2018-08-27,Utilities,37.7,wifi
+2018-08-28,Utilities,54.39,Luz (CON canone RAI)
+2018-09-01,Transport,22,ATM
+2018-09-01,Utilities,15,
+2018-09-03,Food,16,hamburguesa
+2018-09-03,Food,7,pastas turin
+2018-09-03,Food,2.5,magnum
+2018-09-03,Food,6,Ajuste Caparra
+2018-09-03,Food,8,spontini
+2018-09-03,Leisure,28,trenes torino
+2018-09-05,Food,4,siemenns
+2018-09-05,Food,3,
+2018-09-05,Housing,724,
+2018-09-12,Food,6,
+2018-09-12,Food,30,
+2018-09-12,Food,55,lidl
+2018-09-12,Food,5,siemens
+2018-09-12,Health,41.65,examenes de sangre
+2018-09-12,Leisure,13,ps games
+2018-09-12,Leisure,20,ps games
+2018-09-12,Leisure,15,cobija
+2018-09-12,Leisure,33,five guys
+2018-09-12,Leisure,11,vodka
+2018-09-12,Leisure,6,
+2018-09-17,Food,2,siemens
+2018-09-17,Leisure,40,Grados gab - mouse
+2018-09-17,Leisure,30,"Amazon: termo, portabadge, ergo"
+2018-09-17,Leisure,11.5,pizza
+2018-09-18,Leisure,45,inter - spurs
+2018-09-29,Food,13,MD torino
+2018-09-29,Food,8,salamela estadio
+2018-09-29,Food,3,siemens
+2018-09-29,Food,13,nuremberg
+2018-09-29,Food,10,carbonara flia gab
+2018-09-29,Health,29,
+2018-09-29,Leisure,30,corona gaby + regalo diana
+2018-09-29,Leisure,130,ESPRIT
+2018-09-29,Leisure,26,trenes torino
+2018-09-29,Leisure,29,Trenes torino
+2018-09-29,Leisure,23,torino mono
+2018-09-29,Leisure,10,torino
+2018-09-29,Leisure,20,calcio siemens
+2018-09-29,Leisure,55,Tren verona torino
+2018-09-29,Leisure,8,apericena gaby
+2018-09-29,Salary,1569.34,
+2018-09-29,Utilities,109,gas
+2018-10-01,Housing,724,
+2018-10-03,Transport,78,primera tanqueada
+2018-10-04,Food,5,gelato
+2018-10-04,Food,8,
+2018-10-04,Food,7,macdonalds estacion
+2018-10-04,Food,5,siemens
+2018-10-04,Food,5,??
+2018-10-04,Food,2,desayuno
+2018-10-04,Leisure,70,ps games
+2018-10-04,Leisure,11,morral arena
+2018-10-04,Leisure,13,tren torino
+2018-10-04,Transport,1.5,ATM
+2018-10-12,Food,3,fruta
+2018-10-12,Food,7,
+2018-10-12,Food,4,siemens
+2018-10-12,Health,21.9,rx
+2018-10-12,Leisure,16,regalos col tata
+2018-10-12,Leisure,75,regalos col nf
+2018-10-12,Leisure,18,balon
+2018-10-12,Leisure,12,
+2018-10-12,Transport,6,ATM
+2018-10-12,Transport,3.5,parking
+2018-10-15,Food,10,panzerotti
+2018-10-15,Food,39,lidl
+2018-10-15,Food,14,sushi
+2018-10-15,Leisure,3,torino
+2018-10-15,Leisure,24,american graf
+2018-10-15,Leisure,25,trenes torino
+2018-10-18,Food,5,spontini
+2018-10-18,Leisure,25,estuche papa
+2018-10-18,Leisure,20,decathlon
+2018-10-18,Leisure,10,tigota jabones
+2018-10-18,Transport,12,parking x 2
+2018-10-18,Transport,1.5,ATM
+2018-10-20,Food,4,kebab
+2018-10-20,Food,8,
+2018-10-20,Leisure,24,regalos col chocolates
+2018-10-20,Leisure,18,ramen
+2018-10-20,Utilities,38,wifi
+2018-10-25,Food,4,siemens
+2018-10-25,Food,11,gelato
+2018-10-25,Leisure,25,poke
+2018-10-25,Leisure,14,arepas
+2018-10-25,Leisure,8,pizza y birras
+2018-10-25,Transport,11,atm wtf
+2018-10-25,Transport,3,mai piu atm milan
+2018-10-28,Food,5,Siemens
+2018-10-28,Food,10,
+2018-10-28,Leisure,15,cheers
+2018-10-28,Leisure,15,spontini + pizza fritta
+2018-10-28,Utilities,50,luz
+2018-10-29,Food,3,
+2018-10-31,Salary,1570.24,
+2018-11-01,Transport,6,ATM
+2018-11-01,Utilities,38,wifi
+2018-11-04,Food,28,
+2018-11-04,Housing,722.43,
+2018-11-04,Leisure,30,da michele
+2018-11-04,Leisure,20,venezolano
+2018-11-04,Leisure,12,pizza frita
+2018-11-04,Leisure,10,gelato
+2018-11-04,Leisure,10,juanca
+2018-11-08,Food,3,
+2018-11-09,Leisure,5,torino
+2018-11-12,Food,9,panzerotti
+2018-11-12,Food,2,
+2018-11-12,Leisure,18,trenes-bus torino
+2018-11-12,Transport,5,ATM
+2018-11-14,Leisure,30,maquina de afeitar
+2018-11-14,Transport,60.3,gasolina
+2018-11-14,Utilities,25,recarga
+2018-11-15,Food,5,siemens
+2018-11-19,Food,25,
+2018-11-19,Leisure,20,chicuela
+2018-11-20,Food,7,siemens
+2018-11-20,Food,5,evitables
+2018-11-20,Health,86,fisioterapia
+2018-11-22,Leisure,150,Celular papa
+2018-11-26,Food,15,torino
+2018-11-26,Food,7,
+2018-11-26,Leisure,19,ps games
+2018-11-26,Leisure,6,chocolates
+2018-11-26,Leisure,26,trenes torino
+2018-11-26,Leisure,19,disco
+2018-11-26,Transport,5,ATM
+2018-11-27,Leisure,26,ps games
+2018-11-28,Food,7,
+2018-11-30,Food,3,
+2018-11-30,Food,56,lidl (tiramisu chicuela)
+2018-11-30,Leisure,10,ps games
+2018-11-30,Salary,902.8,Sin bonus Renzi x 6 (-480)
+2018-11-30,Transport,1,parking
+2018-12-01,Utilities,46,wifi + 8?
+2018-12-03,Food,20,brunch chicuela
+2018-12-03,Food,6,
+2018-12-03,Food,4,
+2018-12-03,Leisure,17,peajes torino
+2018-12-03,Leisure,4,
+2018-12-03,Transport,6,peajes malpensa
+2018-12-03,Transport,2,parking
+2018-12-04,Housing,722.43,
+2018-12-05,Food,20,poke
+2018-12-05,Food,5,siemens
+2018-12-10,Food,7,
+2018-12-10,Food,6,siemens
+2018-12-10,Food,4,
+2018-12-10,Leisure,45,regalos artigiani
+2018-12-10,Leisure,30,regalos chocolates
+2018-12-10,Leisure,20,batidora
+2018-12-10,Leisure,40,mercado navideno y feria arti
+2018-12-12,Leisure,45,muji
+2018-12-12,Leisure,41,regalo pipi
+2018-12-12,Leisure,12,regalos queso
+2018-12-12,Leisure,50,regalos varios santander
+2018-12-12,Leisure,18,regalos chocolates
+2018-12-12,Leisure,21,regalos fungheria
+2018-12-12,Leisure,12,regalo moka
+2018-12-12,Leisure,30,basuras
+2018-12-12,Transport,20,gasolina
+2018-12-31,Leisure,88,aeropuertos viaje colombia
+2018-12-31,Leisure,814,Colombia + 110 tia chela
+2018-12-31,Salary,2299.49,
+2018-12-31,Utilities,65,luz
