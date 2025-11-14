@@ -69,7 +69,7 @@ export default function Dashboard() {
           console.log(data);
           alert("Transaction created!")
       } catch (err) {
-        alert(err.message); // debug
+        alert(err.message);
       }
       fetchData();
       handleCloseModal();
@@ -82,7 +82,7 @@ export default function Dashboard() {
         });
         alert("Transaction updated!")
       } catch (err) {
-        alert(err.message); // debug
+        alert(err.message);
       }
       fetchData();
       handleCloseModal();
@@ -98,7 +98,7 @@ export default function Dashboard() {
         });
         console.log(data);
       } catch (err) {
-        alert(err.message); // debug
+        alert(err.message);
       }
       fetchData();
       handleCloseModal();

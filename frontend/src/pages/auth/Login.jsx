@@ -18,7 +18,7 @@ export default function Login({ onLogin }) {
   }
   
   const handleSubmit = async (event) => {
-    event.preventDefault(); // prevent page reload
+    event.preventDefault();
     setStatus("Sending...")
     try {
       const data = await apiFetch("/auth/login", {
@@ -33,7 +33,7 @@ export default function Login({ onLogin }) {
       }
 
     } catch (err) {
-      alert(err.message); // debug
+      alert(err.message);
       setStatus("Login failed");
     }
   }

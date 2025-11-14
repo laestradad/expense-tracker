@@ -49,7 +49,6 @@ def changePsw(userid, newhash):
 
 def deleteUser(userid):
     sql = "DELETE FROM users WHERE id = %s"
-    # DELETE DATA ALSO FROM OTHER TABLES WHEN ADDED
     try:
         with db.pool.connection() as conn:
             with conn.cursor() as cur:

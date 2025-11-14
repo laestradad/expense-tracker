@@ -17,7 +17,7 @@ export default function ChangePsw() {
   }
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); // prevent page reload
+    event.preventDefault();
     setStatus("Sending...")
     try {
       const data = await apiFetch("/auth/changepsw", {

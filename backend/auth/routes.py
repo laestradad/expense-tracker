@@ -33,7 +33,7 @@ def login():
         expires_delta = timedelta(seconds=app.config["JWT_EXPIRATION"])
     )
 
-    return jsonify({"token": token, "user_id":userData["id"], "message": f"Thanks {username}, your message was received!"}), 200
+    return jsonify({"token": token, "user_id":userData["id"], "message": f"Welcome {username}!"}), 200
 
 
 @auth_bp.route("/register", methods=["POST"])

@@ -12,6 +12,5 @@ def login_required(f):
         except Exception as e:
             return jsonify({"error": str(e)}), 401
         
-        # You can now inject `current_user_id` into the route
         return f(current_user_id, *args, **kwargs)
     return decorated

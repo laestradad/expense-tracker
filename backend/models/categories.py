@@ -26,7 +26,6 @@ def getCategories(user_id):
     
     
 def get_category_map(user_id):
-    """Load {name: id} map of valid categories from DB."""
     sql = "SELECT id, name FROM categories WHERE user_id IS NULL OR user_id = %s"
     with db.pool.connection() as conn:
         with conn.cursor() as cur:
@@ -35,7 +34,7 @@ def get_category_map(user_id):
 
 
 def get_full_category_map(user_id):
-    """Load {name: id} map of valid categories from DB."""
+    """get_category_map as dictionary"""
     sql = "SELECT id, name, type FROM categories WHERE user_id IS NULL OR user_id = %s"
     with db.pool.connection() as conn:
         with conn.cursor(row_factory=psycopg.rows.dict_row) as cur:
