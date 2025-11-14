@@ -1,3 +1,6 @@
+## 🚀 Live Demo (branch: `deploy`)
+**https://expense-tracker-lae-88d206f63fac.herokuapp.com/**
+
 # Expense Tracker App
 
 A simple expense tracker built with **Python Flask** (backend) and **React** (frontend) with **PostgreSQL** as database. Users can track income and expenses, upload CSVs, view trends, and generate plots with **Plotly.js**.
@@ -12,28 +15,28 @@ A simple expense tracker built with **Python Flask** (backend) and **React** (fr
 |------------|--------|
 | Salary     | income |
 | Gift       | income |
-| Other      | income |
+| Other in   | income |
 | Food       | expense|
 | Housing    | expense|
 | Utilities  | expense|
 | Transport  | expense|
 | Health     | expense|
 | Leisure    | expense|
-| Other      | expense|
+| Other out  | expense|
 
 - CSV upload (downloadable from App, example format):
 ```
 date,category,amount,comment
 2025-01-01,Salary,1000,
 2025-01-01,Gift,100,
-2025-01-01,Other,50,casino
+2025-01-01,Other in,50,casino
 2025-01-01,Food,200,
 2025-01-01,Housing,500,
 2025-01-01,Utilities,100,
 2025-01-01,Transport,50,
 2025-01-01,Health,80,
 2025-01-01,Leisure,50,
-2025-01-01,Other,10,barber
+2025-01-01,Other out,10,barber
 ```
 
 - Account page:
@@ -66,7 +69,7 @@ date,category,amount,comment
 1. Setup PostgreSQL database and run migrations:
 
     ```bash
-    psql -U <user> -d <dbname> -f migrations/init.sql
+    psql -U <user> -d <dbname> -f backend/migrations/001_init.sql
     ```
 
 1. Create a virtual environment and install dependencies:
@@ -84,6 +87,10 @@ date,category,amount,comment
 
 ### Frontend
 
+1. Create .env file:
+    ```
+    VITE_API_URL=http://localhost:5000
+    ```
 1. Install dependencies:
     ```bash
     cd frontend
