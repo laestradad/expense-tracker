@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import MainLayout from "@/layouts/MainLayout";
-import LoginRequired from "@/components/common/LoginRequired";
+import MainLayout from "@/layouts/MainLayout.jsx";
+import LoginRequired from "@/components/common/LoginRequired.jsx";
 
 export default function LoginReqLayout() {
   return (

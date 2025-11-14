@@ -1,5 +1,5 @@
 import { useAuth } from "@/contexts/AuthContext";
-import { apiFetch, downloadFile } from "@/api/api";
+import { apiFetch, downloadFile } from "@/api/api.js";
 
 export default function DeleteAccount() {
   const { logout } = useAuth();

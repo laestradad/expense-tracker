@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { apiFetch } from "@/api/api";
+import { apiFetch } from "@/api/api.js";
 
 export default function Login({ onLogin }) {
   const navigate = useNavigate();

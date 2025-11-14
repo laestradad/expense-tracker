@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { apiFetch } from "@/api/api";
+import { apiFetch } from "@/api/api.js";
 
 export default function Register() {
   const navigate = useNavigate();

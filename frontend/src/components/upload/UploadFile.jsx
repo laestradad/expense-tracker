@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { apiFetch, downloadFile } from "@/api/api";
+import { apiFetch, downloadFile } from "@/api/api.js";
 
 export default function UploadFile() {   
 

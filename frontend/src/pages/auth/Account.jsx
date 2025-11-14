@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
-import UploadFile from "@/components/upload/UploadFile";
+import { useAuth } from "@/contexts/AuthContext.jsx";
+import UploadFile from "@/components/upload/UploadFile.jsx";
 
 export default function Account() {
   const navigate = useNavigate();

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import DashTable from "@/components/dashboard/DashTable.jsx";
 import EditModal from "@/components/dashboard/Modal.jsx";
-import DashMonth from "@/components/dashboard/DashMonth";
-import PlotTrend from "@/components/dashboard/PlotTrend";
+import DashMonth from "@/components/dashboard/DashMonth.jsx";
+import PlotTrend from "@/components/dashboard/PlotTrend.jsx";
 import { apiFetch } from "@/api/api";
 
 export default function Dashboard() {
