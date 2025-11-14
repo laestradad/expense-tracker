@@ -6,12 +6,17 @@ pool = None
 
 def init_db(app):
     global pool
-    dsn = (
-        f"postgresql://{app.config['DB_USER']}:{app.config['DB_PASSWORD']}"
-        f"@{app.config['DB_HOST']}:{app.config['DB_PORT']}/{app.config['DB_NAME']}"
-    )
-    pool = ConnectionPool(dsn)
 
+    # Heroku DATABASE_URL 
+    database_url = app.config['DATABASE_URL']
+    if not database_url:
+        raise RuntimeError("DATABASE_URL is not set")
+
+    # psycopg2 need 'postgresql://' instead of 'postgres://'
+    if database_url.startswith("postgres://"):
+        database_url = database_url.replace("postgres://", "postgresql://", 1)
+
+    pool = ConnectionPool(database_url)
 
 def select_query(sql, params=None, fetch=0, as_dict=False):
 

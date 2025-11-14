@@ -11,6 +11,9 @@ class BaseConfig:
     DB_USER = os.getenv("DB_USER", "postgres")
     DB_PASSWORD = os.getenv("DB_PASSWORD", "")
 
+    # PostgreSQL HEROKU
+    DATABASE_URL = os.getenv("DATABASE_URL", "")
+
     # JWT
     JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "dev-jwt-secret")
     JWT_EXPIRATION = int(os.getenv("JWT_EXPIRATION", 3600))
