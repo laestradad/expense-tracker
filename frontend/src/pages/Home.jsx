@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import reactLogo from "@/assets/react_white.svg";
 import flaskLogo from "@/assets/flask.svg";
 import postgresLogo from "@/assets/postgresSQL.svg";
-import { API_URL } from "@/api/api.js";
 
 export default function Home() {
   const [healthData, setHealthData] = useState({
@@ -12,7 +11,7 @@ export default function Home() {
   });
 
   useEffect(() => {
-    fetch(`${API_URL}/api/health`)
+    fetch('/api/health')
       .then((res) => res.json())
       .then((data) => setHealthData(data))
       .catch(() =>

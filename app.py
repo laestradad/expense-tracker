@@ -22,18 +22,18 @@ def create_app(config_name=config.Dev):
     @app.errorhandler(RequestEntityTooLarge)
     def handle_file_too_large(e):
         return jsonify({"error": "File too large"}), 413
+
+    app.register_blueprint(auth_bp, url_prefix="/auth")
+    app.register_blueprint(api_bp, url_prefix="/api")
+
     
     @app.route('/', defaults={'path': ''})
     @app.route('/<path:path>')
     def serve_react(path):
         if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
             return send_from_directory(app.static_folder, path)
-        else:
-            return send_from_directory(app.static_folder, 'index.html')
-
-    app.register_blueprint(auth_bp, url_prefix="/auth")
-    app.register_blueprint(api_bp, url_prefix="/api")
-
+        return send_from_directory(app.static_folder, 'index.html')
+    
     return app
 
 if __name__ == "__main__":
