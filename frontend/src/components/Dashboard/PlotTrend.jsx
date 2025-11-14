@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Plot from "react-plotly.js";
-import { BaseLayoutDark } from "./plotlyStyles.js";
+import { BaseLayoutDark, Greens, Reds } from "./plotlyStyles.js";
 import { apiFetch } from "@/api/api";
 import "./Dashboard.css";
 
@@ -81,13 +81,19 @@ export default function PlotTrend() {
     },
   });
 
+  let i = 0;
+  let j = 0;
   // Bar charts per type/category
   bardata.forEach((bar) => {
     let color;
     if (bar.type === "income") {
-      color = "#2ca02c";
-    } else if (bar.type === "outcome") {
-      color = "#d62728";
+      color = Greens[i][1];
+      i++;
+      if (i >= Greens.length) i = 0;
+    } else if (bar.type === "expense") {
+      color = Reds[j][1];
+      j++;
+      if (j >= Reds.length) j = 0;
     }
 
     traces.push({
@@ -106,7 +112,8 @@ export default function PlotTrend() {
   const layout = {
     ...BaseLayoutDark,
     barmode: "relative",
-    yaxis: { tickprefix: "€" },
+    xaxis: { type: 'category' },
+    yaxis: { tickprefix: "$" },
     hoverlabel: {
       bgcolor: "rgba(255,255,255,0.75)",
       namelength: -1,
@@ -114,7 +121,7 @@ export default function PlotTrend() {
     },
     legend: { groupclick: "toggleitem" },
     margin: { t: 30 },
-    hovermode: "closest",
+    hovermode: "closest",  
   };  
 
   const config={ 
@@ -122,7 +129,7 @@ export default function PlotTrend() {
             displayModeBar: true,
             scrollZoom: false,
             modeBarButtonsToRemove: [
-              "toImage", "sendDataToCloud", "lasso2d", "select2d"
+              "toImage", "sendDataToCloud", "lasso2d", "select2d", "resetScale2d"
             ],
           }
 

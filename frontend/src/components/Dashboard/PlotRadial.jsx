@@ -30,7 +30,9 @@ export default function PlotRadial({ selectedMonth }) {
       values: data?.values,
       branchvalues: "total",
       leaf: { opacity: 0.6 },
-      marker: { line: { width: 2 }}
+      marker: { line: { width: 2 }},
+      hovertemplate: "%{label}: $%{value:,}<extra></extra>",
+      insidetextfont: { color: "#e2e8f0" },
     },
   ];
 
