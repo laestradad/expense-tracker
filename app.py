@@ -11,7 +11,7 @@ from werkzeug.exceptions import RequestEntityTooLarge
 load_dotenv()
 
 def create_app(config_name=config.Dev):
-    app = Flask(__name__, static_folder='../frontend/dist', static_url_path='/')
+    app = Flask(__name__, static_folder='./dist', static_url_path='/')
     app.config.from_object(config_name)
 
     init_db(app)
