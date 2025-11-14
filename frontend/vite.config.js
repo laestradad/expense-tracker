@@ -12,9 +12,6 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      // Forward all /api requests to Flask backend
-      '/auth': 'http://localhost:5000',
-      '/api': 'http://localhost:5000'
     }
   }
 })

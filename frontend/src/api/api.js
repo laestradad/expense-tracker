@@ -1,11 +1,14 @@
+
 let logoutHandler = null;
 
 export function setLogoutHandler(fn) {
   logoutHandler = fn;
 }
 
+export const API_URL = import.meta.env.VITE_API_URL;
+
 export async function apiFetch(url, options = {}) {
-  try {
+  try { 
     const token = localStorage.getItem("token");
     const headers = {
       "Authorization": token ? `Bearer ${token}` : "",
@@ -17,7 +20,7 @@ export async function apiFetch(url, options = {}) {
       headers["Content-Type"] = "application/json";
     }
 
-    const res = await fetch(url, {
+    const res = await fetch(`${API_URL}${url}`, {
       ...options,
       headers,
     });

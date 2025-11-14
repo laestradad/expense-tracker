@@ -9,7 +9,7 @@ export default function PlotTrend() {
 
   const fetchData = async () => {
     try {
-      const data = await apiFetch("api/plots/trend");
+      const data = await apiFetch("/api/plots/trend");
       setChartData(data || []);
     } catch (error) {
       console.error("Error fetching trend data:", error);

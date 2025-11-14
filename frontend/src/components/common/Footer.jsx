@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import githubLogo from "@/assets/github.svg";
 import linkedinLogo from "@/assets/linkedin.svg";
+import { API_URL } from "@/api/api.js";
 
 export default function Footer() {  
   const [version, setversion] = useState("");
 
   useEffect(() => {
-    fetch("/api/version")
+    fetch(`${API_URL}/api/version`)
       .then((res) => res.json())
       .then((data) => setversion(data.version))
       .catch(() =>
