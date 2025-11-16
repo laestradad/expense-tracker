@@ -90,8 +90,10 @@ def changepsw(user_id):
 @auth_bp.route("/delete", methods=["POST"])
 @login_required
 def delete(user_id):
+    if user_id == '1':
+        return {"error": "demo user cannot be deleted"}, 403
+    
     result = users.deleteUser(user_id)
-    print(result)
     return result
     
 
